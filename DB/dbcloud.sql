@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS public.sinhvien
 	namNhapHoc INT,
 	idChuongTrinhDaoTao TEXT,
 	gioiTinh BOOLEAN,
+	trangThai BOOLEAN,
     CONSTRAINT sinhvien_pkey PRIMARY KEY (maSinhVien),
     CONSTRAINT FK_sinhvien_chuongtrinhdaotao FOREIGN KEY (idChuongTrinhDaoTao)
         REFERENCES public.chuongtrinhdaotao (idChuongTrinhDaoTao) MATCH SIMPLE
@@ -101,24 +102,24 @@ VALUES (4, 'TRR', 2022, 'Học kỳ 1', 50);
 INSERT INTO lophocphan (malophocphan, maMonHoc, namHoc, hocKy, gioiHanSoLuongSinhVien)
 VALUES (5, 'CSKH', 2022, 'Học kỳ 1', 100);
 --
-INSERT INTO sinhvien (maSinhVien, hoDem, ten, ngaySinh, namNhapHoc, idChuongTrinhDaoTao, gioiTinh)
-VALUES ('01', 'Lê Nhật', 'Thảo', '2000-01-05', 2022, 'CNTT', TRUE);
-INSERT INTO sinhvien (maSinhVien, hoDem, ten, ngaySinh, namNhapHoc, idChuongTrinhDaoTao, gioiTinh)
-VALUES ('02', 'Trần Văn', 'An', '2000-07-05', 2022, 'KHMT', TRUE);
-INSERT INTO sinhvien (maSinhVien, hoDem, ten, ngaySinh, namNhapHoc, idChuongTrinhDaoTao, gioiTinh)
-VALUES ('03', 'Lê Thị', 'Thủy', '1999-01-05', 2020, 'QTKD', FALSE);
-INSERT INTO sinhvien (maSinhVien, hoDem, ten, ngaySinh, namNhapHoc, idChuongTrinhDaoTao, gioiTinh)
-VALUES ('04', 'Hoàng Mỹ', 'Nương', '1999-01-06', 2020, 'QTKD', FALSE);
-INSERT INTO sinhvien (maSinhVien, hoDem, ten, ngaySinh, namNhapHoc, idChuongTrinhDaoTao, gioiTinh)
-VALUES ('05', 'Nguyên Hoàng', 'Yến', '1999-12-16', 2022, 'CNTT', FALSE);
+INSERT INTO sinhvien (maSinhVien, hoDem, ten, ngaySinh, namHoc, namNhapHoc, idChuongTrinhDaoTao, gioiTinh, trangThai)
+VALUES ('01', 'Lê Nhật', 'Thảo', '2000-01-05',1 , 2022, 'CNTT', TRUE, TRUE);
+INSERT INTO sinhvien (maSinhVien, hoDem, ten, ngaySinh, namHoc, namNhapHoc, idChuongTrinhDaoTao, gioiTinh, trangThai)
+VALUES ('02', 'Trần Văn', 'An', '2000-07-05',1 , 2022, 'KHMT', TRUE, TRUE);
+INSERT INTO sinhvien (maSinhVien, hoDem, ten, ngaySinh, namHoc, namNhapHoc, idChuongTrinhDaoTao, gioiTinh, trangThai)
+VALUES ('03', 'Lê Thị', 'Thủy', '1999-01-05', 3, 2020, 'QTKD', FALSE, TRUE);
+INSERT INTO sinhvien (maSinhVien, hoDem, ten, ngaySinh, namHoc, namNhapHoc, idChuongTrinhDaoTao, gioiTinh, trangThai)
+VALUES ('04', 'Hoàng Mỹ', 'Nương', '1999-01-06',3 ,2020, 'QTKD', FALSE, TRUE);
+INSERT INTO sinhvien (maSinhVien, hoDem, ten, ngaySinh, namHoc, namNhapHoc, idChuongTrinhDaoTao, gioiTinh, trangThai)
+VALUES ('05', 'Nguyên Hoàng', 'Yến', '1999-12-16',1 ,2022, 'CNTT', FALSE, TRUE);
 --
 INSERT INTO thamgiahoc(maLopHocPhan, maSinhVien, diemSo)
-VALUES (4, '01', NULL);
+VALUES (4, '01', 9);
 INSERT INTO thamgiahoc(maLopHocPhan, maSinhVien, diemSo)
-VALUES (4, '02', NULL);
+VALUES (4, '02', 9);
 INSERT INTO thamgiahoc(maLopHocPhan, maSinhVien, diemSo)
-VALUES (5, '03', NULL);
+VALUES (5, '03', 9);
 INSERT INTO thamgiahoc(maLopHocPhan, maSinhVien, diemSo)
-VALUES (5, '04', NULL);
+VALUES (5, '04', 9);
 INSERT INTO thamgiahoc(maLopHocPhan, maSinhVien, diemSo)
-VALUES (5, '05', NULL);
+VALUES (5, '05', 9);
