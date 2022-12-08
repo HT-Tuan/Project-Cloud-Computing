@@ -59,7 +59,7 @@ public class SinhVienController {
         temp.setGioiTinh(data.getGioitinh());
         temp.setChuongtrinh(null);
         temp.setThamgiahocs(null);
-        temp.setTrangThai(rue);
+        temp.setTrangThai(true);
         if (sinhVienDao.insert(temp) == true) {
             return new ResponseEntity<>(data, HttpStatus.OK);
         }
