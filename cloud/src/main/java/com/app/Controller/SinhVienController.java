@@ -2,30 +2,68 @@ package com.app.Controller;
 
 import java.util.List;
 
-import org.hibernate.query.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.app.Util.HibernateUtils;
+import com.app.Response.SinhvienResponse;
+import com.app.model.dao.SinhVienDao;
 import com.app.model.entity.sinhvien;
 
-
+@RestController
 public class SinhVienController {
-    
-    private SessionFactory sessionFactory = HibernateUtils.getFACTORY();
+    private SinhVienDao sinhVienDao = new SinhVienDao();
+    private sinhvien temp;
 
-    public void getAll()
-    {
-        Session session = sessionFactory.openSession();
-        try {
-            String hql = "FROM sinhvien";
-            Query<sinhvien> query = session.createQuery(hql);
-            List<sinhvien> x1 = query.list();
-            for(sinhvien item : x1)
-            System.out.print(item.getMasinhvien());
-        } catch (Exception e) {
-            // TODO: handle exception
-            System.out.println("loi" + e.toString());
-        }
+    @GetMapping("/sinhviens")
+    public List<SinhvienResponse> getAll() {
+        return sinhVienDao.getAll();
     }
+
+    @DeleteMapping("/sinhvien")
+    public ResponseEntity<String> deleteID(@RequestParam(name = "masinhvien") String Id) {
+        temp = null;
+        temp = sinhVienDao.getID(Id);
+        if (temp != null) {
+            temp.setTrangThai(false);
+            if (sinhVienDao.update(temp))
+                return new ResponseEntity<>("Thành công", HttpStatus.OK);
+            else
+                return new ResponseEntity<>("Thất bại", HttpStatus.NOT_FOUND);
+
+        }
+        return new ResponseEntity<>("Thất bại", HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/sinhvien")
+    public ResponseEntity<SinhvienResponse> create(@RequestBody SinhvienResponse data) {
+        temp = null;
+        temp = sinhVienDao.getID(data.getMasinhvien());
+        if (temp != null && temp.getTrangThai() == true) {
+            return new ResponseEntity<>(HttpStatus.FOUND);
+        }
+        if (temp == null) {
+            temp = new sinhvien();
+        }
+        temp.setMaSinhVien(data.getMasinhvien());
+        temp.setHoDem(data.getHodem());
+        temp.setTen(data.getTen());
+        temp.setNamHoc(data.getNamhoc());
+        temp.setNgaySinh(data.getNgaysinh());
+        temp.setNamNhapHoc(data.getNamnhaphoc());
+        temp.setGioiTinh(data.getGioitinh());
+        temp.setChuongtrinh(null);
+        temp.setThamgiahocs(null);
+        temp.setTrangThai(rue);
+        if (sinhVienDao.insert(temp) == true) {
+            return new ResponseEntity<>(data, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 }

@@ -19,71 +19,87 @@ import javax.persistence.Temporal;
 public class sinhvien implements Serializable{
 
      @Id
-     private String masinhvien;
+     private String maSinhVien;
 
-     private String hodem;
+     private String hoDem;
      private String ten;
-     private int namhoc;
+     private int namHoc;
 
      @Temporal(javax.persistence.TemporalType.DATE)
-     private Date ngaysinh;
+     private Date ngaySinh;
 
-     private int namnhaphoc;
-     private Boolean gioitinh;
-
+     private int namNhapHoc;
+     private Boolean gioiTinh;
+     private Boolean trangThai;
      @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-     @JoinColumn(name = "idchuongtrinhdaotao")
+     @JoinColumn(name = "idChuongTrinhDaoTao")
      private chuongtrinhdaotao chuongtrinh;
 
      @OneToMany(mappedBy = "Sinhvien", fetch = FetchType.EAGER)
      private Set<thamgiahoc> thamgiahocs;
 
-     public String getMasinhvien() {
-          return masinhvien;
+     public String getMaSinhVien() {
+          return maSinhVien;
      }
 
-     public void setMasinhvien(String masinhvien) {
-          this.masinhvien = masinhvien;
+     public void setMaSinhVien(String maSinhVien) {
+          this.maSinhVien = maSinhVien;
      }
 
-     public String getHodem() {
-          return hodem;
+     public String getHoDem() {
+          return hoDem;
      }
 
-     public void setHodem(String hodem) {
-          this.hodem = hodem;
+     public void setHoDem(String hoDem) {
+          this.hoDem = hoDem;
      }
 
-     public int getNamhoc() {
-          return namhoc;
+     public String getTen() {
+          return ten;
      }
 
-     public void setNamhoc(int namhoc) {
-          this.namhoc = namhoc;
+     public void setTen(String ten) {
+          this.ten = ten;
      }
 
-     public Date getNgaysinh() {
-          return ngaysinh;
+     public int getNamHoc() {
+          return namHoc;
      }
 
-     public void setNgaysinh(Date ngaysinh) {
-          this.ngaysinh = ngaysinh;
+     public void setNamHoc(int namHoc) {
+          this.namHoc = namHoc;
      }
 
-     public int getNamnhaphoc() {
-          return namnhaphoc;
+     public Date getNgaySinh() {
+          return ngaySinh;
      }
 
-     public void setNamnhaphoc(int namnhaphoc) {
-          this.namnhaphoc = namnhaphoc;
+     public void setNgaySinh(Date ngaySinh) {
+          this.ngaySinh = ngaySinh;
      }
 
-     public Boolean getGioitinh() {
-          return gioitinh;
+     public int getNamNhapHoc() {
+          return namNhapHoc;
      }
 
-     public void setGioitinh(Boolean gioitinh) {
-          this.gioitinh = gioitinh;
+     public void setNamNhapHoc(int namNhapHoc) {
+          this.namNhapHoc = namNhapHoc;
+     }
+
+     public Boolean getGioiTinh() {
+          return gioiTinh;
+     }
+
+     public void setGioiTinh(Boolean gioiTinh) {
+          this.gioiTinh = gioiTinh;
+     }
+
+     public Boolean getTrangThai() {
+          return trangThai;
+     }
+
+     public void setTrangThai(Boolean trangThai) {
+          this.trangThai = trangThai;
      }
 
      public chuongtrinhdaotao getChuongtrinh() {
@@ -102,12 +118,5 @@ public class sinhvien implements Serializable{
           this.thamgiahocs = thamgiahocs;
      }
 
-     public String getTen() {
-          return ten;
-     }
-
-     public void setTen(String ten) {
-          this.ten = ten;
-     }
      
 }
