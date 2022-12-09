@@ -31,11 +31,11 @@ public class sinhvien implements Serializable{
      private int namNhapHoc;
      private Boolean gioiTinh;
      private Boolean trangThai;
-     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+     @ManyToOne(fetch = FetchType.EAGER)
      @JoinColumn(name = "idChuongTrinhDaoTao")
      private chuongtrinhdaotao chuongtrinh;
 
-     @OneToMany(mappedBy = "Sinhvien", fetch = FetchType.EAGER)
+     @OneToMany(mappedBy = "Sinhvien", fetch = FetchType.LAZY)
      private Set<thamgiahoc> thamgiahocs;
 
      public String getMaSinhVien() {
