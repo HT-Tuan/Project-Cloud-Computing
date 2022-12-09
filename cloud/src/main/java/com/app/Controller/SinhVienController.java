@@ -7,17 +7,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.Response.SinhvienResponse;
+import com.app.model.dao.ChuongTrinhDTDao;
 import com.app.model.dao.SinhVienDao;
 import com.app.model.entity.sinhvien;
 
 @RestController
 public class SinhVienController {
     private SinhVienDao sinhVienDao = new SinhVienDao();
+    private ChuongTrinhDTDao chuongTrinhDTDao = new ChuongTrinhDTDao();
     private sinhvien temp;
 
     @GetMapping("/sinhviens")
@@ -57,8 +60,7 @@ public class SinhVienController {
         temp.setNgaySinh(data.getNgaysinh());
         temp.setNamNhapHoc(data.getNamnhaphoc());
         temp.setGioiTinh(data.getGioitinh());
-        temp.setChuongtrinh(null);
-        temp.setThamgiahocs(null);
+        temp.setChuongtrinh(chuongTrinhDTDao.getName(data.getTenChuongTrinhDaoTao()));
         temp.setTrangThai(true);
         if (sinhVienDao.insert(temp) == true) {
             return new ResponseEntity<>(data, HttpStatus.OK);
@@ -66,4 +68,23 @@ public class SinhVienController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @PutMapping("/sinhvien")
+    public ResponseEntity<SinhvienResponse> update(@RequestBody SinhvienResponse data)
+    {
+        temp = null;
+        temp = new sinhvien();
+        temp.setMaSinhVien(data.getMasinhvien());
+        temp.setHoDem(data.getHodem());
+        temp.setTen(data.getTen());
+        temp.setNamHoc(data.getNamhoc());
+        temp.setNgaySinh(data.getNgaysinh());
+        temp.setNamNhapHoc(data.getNamnhaphoc());
+        temp.setGioiTinh(data.getGioitinh());
+        temp.setChuongtrinh(chuongTrinhDTDao.getName(data.getTenChuongTrinhDaoTao()));
+        temp.setTrangThai(true);
+        if (sinhVienDao.update(temp) == true) {
+            return new ResponseEntity<>(data, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }
