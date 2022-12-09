@@ -29,56 +29,31 @@ public class ThamGiaHocController {
 	private ThamGiaHocDao thamGiaHocDao = new ThamGiaHocDao();
 	
 	@GetMapping (value = "/thamgiahoc/{maLopHocPhan}/{maSinhVien}")
-	public ResponseEntity<ResponseObject> select (@PathVariable int maLopHocPhan, @PathVariable String maSinhVien) {
+	public ThamGiaHocResponse select (@PathVariable int maLopHocPhan, @PathVariable String maSinhVien) {
 		thamgiahoc ThamGia = thamGiaHocDao.select(maLopHocPhan, maSinhVien);
 		
-		if (ThamGia == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-					new ResponseObject("Failed", "Failed to select the object", ""));
-		}
-		else {
-			return ResponseEntity.status(HttpStatus.OK).body(
-					new ResponseObject("Success", "Select the object successfully", convertToResponseObject(ThamGia)));
-		}
+		return convertToResponseObject(ThamGia);		
 	}
 	
 	@GetMapping (value = "/thamgiahoc/malop/{maLopHocPhan}")
-	public ResponseEntity<ResponseObject> selectByMaLop (@PathVariable int maLopHocPhan) {
+	public List<ThamGiaHocResponse> selectByMaLop (@PathVariable int maLopHocPhan) {
 		List<thamgiahoc> ThamGia = thamGiaHocDao.selectByMaLop(maLopHocPhan);
 		
-		if (ThamGia == null || ThamGia.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-					new ResponseObject("Failed", "Failed to select the object by class id", ""));
-		}else {
-			return ResponseEntity.status(HttpStatus.OK).body(
-					new ResponseObject("Success", "Select the object by class id successfully", convertToListResponseObject(ThamGia)));
-		}
+		return convertToListResponseObject(ThamGia);
 	}
 	
 	@GetMapping (value = "/thamgiahoc/masv/{maSinhVien}")
-	public ResponseEntity<ResponseObject> selectByMaSV (@PathVariable String maSinhVien) {
+	public List<ThamGiaHocResponse> selectByMaSV (@PathVariable String maSinhVien) {
 		List<thamgiahoc> ThamGia = thamGiaHocDao.selectByMaSV(maSinhVien);
 		
-		if (ThamGia == null || ThamGia.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-					new ResponseObject("Failed", "Failed to select the object by student id", ""));
-		}else {
-			return ResponseEntity.status(HttpStatus.OK).body(
-					new ResponseObject("Success", "Select the object by student id successfully", convertToListResponseObject(ThamGia)));
-		}
+		return convertToListResponseObject(ThamGia);		
 	}
 	
 	@GetMapping (value = "/thamgiahoc")
-	public ResponseEntity<ResponseObject> selectAll () {
+	public List<ThamGiaHocResponse> selectAll () {
 		List<thamgiahoc> ThamGia = thamGiaHocDao.selectAll();
 		
-		if (ThamGia == null || ThamGia.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-					new ResponseObject("Failed", "Failed to select all the object", ""));
-		}else {
-			return ResponseEntity.status(HttpStatus.OK).body(
-					new ResponseObject("Success", "Select all the object successfully", convertToListResponseObject(ThamGia)));
-		}
+		return convertToListResponseObject(ThamGia);
 	}
 	
 	@PostMapping (value = "/thamgiahoc")

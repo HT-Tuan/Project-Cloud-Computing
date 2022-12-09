@@ -25,28 +25,17 @@ public class MonHocController {
 	private MonHocDao monHocDao = new MonHocDao();
 	
 	@GetMapping (value = "/monhoc")
-	public ResponseEntity<ResponseObject> findAll () {
+	public List<MonHocResponse> findAll () {
 		List<monhoc> monHocList = monHocDao.getAll();
 		
-		return monHocList == null ? 
-				ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-						new ResponseObject("Failed", "Failed to select the subject", "")
-				):
-				ResponseEntity.status(HttpStatus.OK).body(
-							new ResponseObject("Success", "Find all subject successfully", convertToListResponseObject(monHocList))
-				);
+		return convertToListResponseObject(monHocList);
 	}
 	
 	@GetMapping (value = "/monhoc/{id}")
-	public ResponseEntity<ResponseObject> findById (@PathVariable String id) { 
+	public MonHocResponse findById (@PathVariable String id) { 
 		monhoc MonHoc = monHocDao.select(id);
-		return MonHoc == null ? 
-				ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-						new ResponseObject("Failed", "Failed to select the subject", "")
-				):
-				ResponseEntity.status(HttpStatus.OK).body(
-							new ResponseObject("Success", "Find subject by id successfully", convertToResponseObject(MonHoc))
-				);
+		
+		return convertToResponseObject(MonHoc);
 	}
 	
 	@PostMapping (value = "/monhoc")
