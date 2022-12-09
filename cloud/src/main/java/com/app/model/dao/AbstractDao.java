@@ -21,9 +21,7 @@ public class AbstractDao<T> {
                 transaction.rollback();
             }
             e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        } 
         return false;
     }
 
@@ -38,9 +36,7 @@ public class AbstractDao<T> {
         } catch (Exception e) {
             transaction.rollback();
             e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        } 
         return false;
     }
 
@@ -55,9 +51,7 @@ public class AbstractDao<T> {
         } catch (Exception e) {
             transaction.rollback();
             e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        } 
         return false;
     }
 }

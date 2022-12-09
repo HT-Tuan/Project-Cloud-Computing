@@ -28,11 +28,11 @@ public class lophocphan implements Serializable{
     @Column(name = "gioiHanSoLuongSinhVien")
     private int gioiHanSlg;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "maMonHoc")
     private monhoc monHoc;
 
-    @OneToMany(mappedBy = "lophoc", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "lophoc", fetch = FetchType.LAZY)
     private Set<thamgiahoc> thamgiahocs;
 
     public int getMaLopHocPhan() {

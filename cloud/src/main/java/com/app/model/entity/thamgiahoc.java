@@ -14,12 +14,12 @@ import javax.persistence.Table;
 @Table(name = "thamgiahoc")
 public class thamgiahoc implements Serializable{
     @Id
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "maLopHocPhan")
     private lophocphan lophoc;
 
     @Id
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "maSinhVien")
     private sinhvien Sinhvien;
 

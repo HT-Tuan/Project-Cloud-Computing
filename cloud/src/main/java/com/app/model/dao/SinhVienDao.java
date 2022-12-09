@@ -55,8 +55,6 @@ public class SinhVienDao extends AbstractDao<sinhvien> implements IAbstracDao<si
             return sv;
         } catch (Exception e) {
             System.out.println("loi" + e.toString());
-        }finally{
-            session.close();
         }
         return null;
     }
@@ -71,9 +69,7 @@ public class SinhVienDao extends AbstractDao<sinhvien> implements IAbstracDao<si
             return query.list().get(0);
         } catch (Exception e) {
             System.out.println("loi" + e.toString());
-        } finally {
-            session.close();
-        }
+        } 
         return null;
     }
 }
