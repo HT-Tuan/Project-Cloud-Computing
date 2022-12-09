@@ -29,25 +29,17 @@ public class LopHocPhanController {
 	private MonHocDao monHocDao = new MonHocDao();
 
 	@GetMapping(value = "/lophocphan")
-	public ResponseEntity<ResponseObject> findAll() {
+	public List<LopHocPhanResponse> findAll() {
 		List<lophocphan> list = lopHocPhanDao.findAll();
 
-		return list == null
-				? ResponseEntity.status(HttpStatus.NOT_FOUND)
-						.body(new ResponseObject("Failed", "Failed to find the class", ""))
-				: ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("Success", "Find all class successfully",
-						convertToListResponseObject(list)));
+		return convertToListResponseObject(list);
 	}
 
 	@GetMapping(value = "/lophocphan/{id}")
-	public ResponseEntity<ResponseObject> findById(@PathVariable int id) {
+	public LopHocPhanResponse findById(@PathVariable int id) {
 		lophocphan LopHocPhan = lopHocPhanDao.select(id);
 
-		return LopHocPhan == null
-				? ResponseEntity.status(HttpStatus.NOT_FOUND)
-						.body(new ResponseObject("Failed", "Failed to find the class by id", ""))
-				: ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("Success",
-						"Find the class by id successfully", convertToResponseObject(LopHocPhan)));
+		return convertToResponseObject(LopHocPhan);
 	}
 
 	@PostMapping(value = "/lophocphan")
