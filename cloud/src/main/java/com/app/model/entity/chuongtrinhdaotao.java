@@ -3,6 +3,7 @@ package com.app.model.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -19,10 +20,10 @@ public class chuongtrinhdaotao implements Serializable{
     private Float soTinChi;
     private int namBatDauDaoTao;
 
-    @OneToMany(mappedBy = "chuongtrinh", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "chuongtrinh", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<sinhvien> sinhviens;
 
-    @OneToMany(mappedBy = "chuongtrinh", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "chuongtrinh", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<monhoc> monhocs;
 
     public String getIdChuongTrinhDaoTao() {

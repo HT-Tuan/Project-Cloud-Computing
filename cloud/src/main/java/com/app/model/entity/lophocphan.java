@@ -32,7 +32,7 @@ public class lophocphan implements Serializable{
     @JoinColumn(name = "maMonHoc")
     private monhoc monHoc;
 
-    @OneToMany(mappedBy = "lophoc", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "lophoc", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<thamgiahoc> thamgiahocs;
 
     public int getMaLopHocPhan() {

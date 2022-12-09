@@ -1,14 +1,15 @@
 docker network create springboot-app-network
-
+====================
+<NOTE: vị trí chạy các lệnh này là ở PWD>
 docker run --name DB-postgres -p 5430:5432 -e POSTGRES_PASSWORD=admin -v ${PWD}/postgres-docker:/var/lib/postgresql/data --network springboot-app-network -d postgres
 
 <Thực hiện mở pgAdmin4 kết nối với DB-postgres (với localhost:5430 + pass=admin)>
 <Sau khi kết nối thành công thực hiện tạo db>
 
-docker run -dp 8090:8090 --name springboot-docker-container -v "$(pwd):/app" --network springboot-app-network tuancodeit/springboot-docker:v1.1.0
+docker run -dp 8090:8090 --name springboot-docker-container -v "$(pwd):/app" --network springboot-app-network tuancodeit/springboot-docker:v2.0.0
 
 --hoàn thành--
-
-
-docker run -dp 8090:8090 --name springboot-docker-container -v "$(pwd):/app" --network springboot-app-network springboot-docker:lastest
-docker run --name DB-postgres -p 5430:5432 -e POSTGRES_PASSWORD=admin  --network springboot-app-network -d postgres
+====================
+MACOS
+docker run --name DB-postgres -p 5430:5432 -e POSTGRES_PASSWORD=admin --network springboot-app-network -d postgres
+docker run -dp 8090:8090 --name springboot-docker-container -v "$(pwd):/app" --network springboot-app-network tuancodeit/springboot-docker:v2.0.0
