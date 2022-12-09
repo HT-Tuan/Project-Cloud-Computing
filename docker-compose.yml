@@ -1,0 +1,47 @@
+version: '3.4'
+
+#NETWORK
+networks:
+  springboot-app-network:
+    driver: bridge
+
+#SERVICES
+services:
+  #DB
+  portsgres:
+    container_name: DB-postgres
+    image: postgres
+    ports:
+      -  "5430:5432"
+    environment:
+      - POSTGRES_PASSWORD=admin
+    volumes:
+      - ./cloud/postgres-docker:/var/lib/postgresql/data
+    networks:
+      - springboot-app-network
+
+  # Frontend
+  net-core:
+    container_name: StudentsManagment
+    build:
+      dockerfile: StudentsManagment/Dockerfile
+      context: ./StudentsManagment/
+    ports:
+      -  "8091:80"
+    networks:
+      - springboot-app-network
+
+  # Backend
+  java-springboot:
+    container_name: JavaAPI
+    # build: 
+    #   dockerfile: Dockerfile
+    #   context: ./cloud/
+    image: tuancodeit/springboot-docker:v2.0.0
+    ports:
+      -  "8090:8090"
+    volumes:
+      - ./cloud:/app
+    networks:
+      - springboot-app-network
+
