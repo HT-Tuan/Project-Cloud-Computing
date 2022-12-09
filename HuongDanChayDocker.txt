@@ -10,3 +10,5 @@ docker run -dp 8090:8090 --name springboot-docker-container -v "$(pwd):/app" --n
 --hoàn thành--
 
 
+docker run -dp 8090:8090 --name springboot-docker-container -v "$(pwd):/app" --network springboot-app-network springboot-docker:lastest
+docker run --name DB-postgres -p 5430:5432 -e POSTGRES_PASSWORD=admin  --network springboot-app-network -d postgres
