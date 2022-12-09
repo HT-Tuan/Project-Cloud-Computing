@@ -19,10 +19,10 @@ public class chuongtrinhdaotao implements Serializable{
     private Float soTinChi;
     private int namBatDauDaoTao;
 
-    @OneToMany(mappedBy = "chuongtrinh", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "chuongtrinh", fetch = FetchType.LAZY)
     private Set<sinhvien> sinhviens;
 
-    @OneToMany(mappedBy = "chuongtrinh", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "chuongtrinh", fetch = FetchType.LAZY)
     private Set<monhoc> monhocs;
 
     public String getIdChuongTrinhDaoTao() {

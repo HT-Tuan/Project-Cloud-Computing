@@ -22,11 +22,11 @@ public class monhoc implements Serializable{
     private Float soTinchi;
     private String theLoai;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idchuongtrinhdaotao")
     private chuongtrinhdaotao chuongtrinh;
 
-    @OneToMany(mappedBy = "monHoc", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "monHoc", fetch = FetchType.LAZY)
     private Set<lophocphan> lophocphans;
 
     public String getMaMonHoc() {
