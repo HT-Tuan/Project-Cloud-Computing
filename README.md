@@ -5,7 +5,7 @@
 3. KHAMSAVATH Bounmy - 20110L02
 
 ## Hướng dẫn chạy chương trình
-![Alt]()
+![Alt](https://github.com/HT-Tuan/Project-Cloud-Computing/blob/main/DB/picture.png?raw=true)
 
 ## Thực hiện:
 1. cd Project-Cloud-Computing (Sau khi download project)
