@@ -26,7 +26,7 @@ public class monhoc implements Serializable{
     @JoinColumn(name = "idchuongtrinhdaotao")
     private chuongtrinhdaotao chuongtrinh;
 
-    @OneToMany(mappedBy = "monHoc", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "monHoc", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<lophocphan> lophocphans;
 
     public String getMaMonHoc() {

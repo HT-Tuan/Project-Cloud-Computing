@@ -3,8 +3,6 @@ package com.app.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,9 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.Response.MonHocResponse;
 import com.app.Response.ResponseObject;
-import com.app.Util.HibernateUtils;
 import com.app.model.dao.MonHocDao;
-import com.app.model.entity.chuongtrinhdaotao;
 import com.app.model.entity.monhoc;
 
 @RestController
@@ -75,11 +71,13 @@ public class MonHocController {
 	
 	@PutMapping (value = "/monhoc/{id}")
 	private ResponseEntity<ResponseObject> update (@PathVariable String id, @RequestBody MonHocResponse monHocResponse) {
-		monhoc MonHoc = monHocDao.select(id);
+		monhoc MonHoc = monHocDao.select(id);	
 		if (MonHoc == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
 					new ResponseObject("Failed", "Can't find the subject to update", ""));
 		}
+		
+		MonHoc.setLophocphans(null);
 		MonHoc.setTenMonHoc(monHocResponse.getTenMonHoc());
 		MonHoc.setSoTinchi(monHocResponse.getSoTinchi());
 		MonHoc.setTheLoai(monHocResponse.getTheLoai());

@@ -59,7 +59,7 @@ public class MonHocDao {
 		try {
 			Session session = HibernateUtils.getFACTORY().openSession();
 			transaction = session.beginTransaction();
-			session.saveOrUpdate(MonHoc);
+			session.update(MonHoc);
 			transaction.commit();
 			
 			return MonHoc;
@@ -101,6 +101,10 @@ public class MonHocDao {
 			Session session = HibernateUtils.getFACTORY().openSession();
 			transaction = session.beginTransaction();
 			monhoc MonHoc = select(maMonHoc);
+			if (MonHoc == null) {
+				return null;
+			}
+			MonHoc.setLophocphans(null);
 			session.delete(MonHoc);
 			transaction.commit();
 			

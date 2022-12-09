@@ -35,7 +35,7 @@ public class sinhvien implements Serializable{
      @JoinColumn(name = "idChuongTrinhDaoTao")
      private chuongtrinhdaotao chuongtrinh;
 
-     @OneToMany(mappedBy = "Sinhvien", fetch = FetchType.LAZY)
+     @OneToMany(mappedBy = "Sinhvien", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
      private Set<thamgiahoc> thamgiahocs;
 
      public String getMaSinhVien() {
