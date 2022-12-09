@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Danh Sách sinh viên";
+}
+
+<div>
+    <div>
+        <h1>@ViewData["Title"]</h1>
+        <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="AddStudentForm">Add new student</a>
+    </div>
+    <form class="d-flex mb-1">
+        <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <a class="btn btn-primary" href="#" role="button">Search</a>
+        </div>
+    </form>
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Mã sinh viên</th>
+                <th scope="col">Họ đệm</th>
+                <th scope="col">Năm học</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Ngày sinh</th>
+                <th scope="col">Năm Nhập học</th>
+                <th scope="col">Mã chương trìh đào tạo</th>
+                <th scope="col">Giới tính</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>20110102</td>
+                <td>Cao Văn</td>
+                <td>2020-2024</td>
+                <td>Hung</td>
+                <td>15/11/2001</td>
+                <td>2020-2024</td>
+                <td>13</td>
+                <td>Nam</td>
+                <td>True</td>
+                <td></td>
+
+
+                <td class="d-flex align-items-center">
+                    <a class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="UpdateStudentForm">Edit</a>
+                    <span>|</span>
+                    <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="#">Delete</a>
+                </td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+</div>
+

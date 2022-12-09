@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "MonHoc";
+}
+
+<div>
+    <div>
+        <h1>@ViewData["Title"]</h1>
+        <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="AddStudentForm">Add new student</a>
+    </div>
+    <form class="d-flex mb-1">
+        <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <a class="btn btn-primary" href="#" role="button">Search</a>
+        </div>
+    </form>
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">TT</th>
+                <th scope="col">Mã môn học</th>
+                <th scope="col">Tên môn học</th>
+                <th scope="col">Số tín chị</th>
+                <th scope="col">Thể loại</th>
+                <th scope="col">Mã trương chình đạo tạo</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>100CLC</td>
+                <td>ABC</td>
+                <td>3</td>
+                <td>Bắt buộc</td>
+                <td>12</td>
+                <td class="d-flex align-items-center">
+                    <a class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="UpdateStudentForm">Edit</a>
+                    <span>|</span>
+                    <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="#">Delete</a>
+                </td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+</div>
+
