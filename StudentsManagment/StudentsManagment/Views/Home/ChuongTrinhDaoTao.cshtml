@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "ChuongTrinhDaoTao";
+}
+
+<div>
+    <div>
+        <h1>@ViewData["Title"]</h1>
+        <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="AddStudentForm">Add new student</a>
+    </div>
+    <form class="d-flex mb-1">
+        <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <a class="btn btn-primary" href="#" role="button">Search</a>
+        </div>
+    </form>
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">TT</th>
+                <th scope="col">Mã chương trình đạo tạo</th>
+                <th scope="col">Tên chương trình đạo tạo</th>
+                <th scope="col">Số tính chị</th>
+                <th scope="col">Năm bắt đầu học</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <th scope="row">1</th>
+                <td>@item.idChuongTrinhDaoTao</td>
+                <td>@item.tenChuongTrinhDaoTao</td>
+                <td>@item.soTinChi</td>
+                <td>@item.namBatDauDaoTao</td>
+                <td></td>
+                <td class="d-flex align-items-center">
+                    <a class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="UpdateStudentForm">Edit</a>
+                    <span>|</span>
+                    <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="#">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
