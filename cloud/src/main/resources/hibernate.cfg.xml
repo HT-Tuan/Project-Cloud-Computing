@@ -7,7 +7,7 @@
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.url">jdbc:postgresql://DB-postgres:5432/cloud</property>
         <property name="connection.username">postgres</property>
-        <property name="connection.password">Hongson1234</property>
+        <property name="connection.password">admin</property>
         
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">10</property>
