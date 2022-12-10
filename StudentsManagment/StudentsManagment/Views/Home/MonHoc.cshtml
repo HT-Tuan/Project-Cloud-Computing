@@ -29,21 +29,28 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>100CLC</td>
-                <td>ABC</td>
-                <td>3</td>
-                <td>Bắt buộc</td>
-                <td>12</td>
-                <td class="d-flex align-items-center">
-                    <a class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="UpdateStudentForm">Edit</a>
-                    <span>|</span>
-                    <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="#">Delete</a>
-                </td>
-            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row"></th>
+                    <td>@item.maMonHoc</td>
+                    <td>@item.tenMonHoc</td>
+                    <td>@item.soTinchi</td>
+                    <td>@item.theLoai</td>
+                    <td>@item.idChuongTrinhDaoTao</td>
+                  
+
+
+                    <td class="d-flex align-items-center">
+                        <a class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="UpdateStudentForm">Edit</a>
+                        <span>|</span>
+                        <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="#">Delete</a>
+                    </td>
+                </tr>
+            }
             
-            
+
+
         </tbody>
     </table>
 </div>

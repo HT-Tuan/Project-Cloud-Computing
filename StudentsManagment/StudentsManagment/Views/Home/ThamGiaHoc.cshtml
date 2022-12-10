@@ -23,26 +23,30 @@
                 <th scope="col">Mã lớp học phần</th>
                 <th scope="col">Mã sinh viên </th>
                 <th scope="col">Điểm số</th>
-                
+
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>1</td>
-                <td>15</td>
-                <td>20110l02</td>
-                
-                <td class="d-flex align-items-center">
-                    <a class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="UpdateStudentForm">Edit</a>
-                    <span>|</span>
-                    <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="#">Delete</a>
-                </td>
-            </tr>
-           
-           
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row"></th>
+                    <td>@item.maLopHocPhan</td>
+                    <td>@item.maSinhVien</td>
+                    <td>@item.diemSo</td>
+
+
+                    <td class="d-flex align-items-center">
+                        <a class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="UpdateStudentForm">Edit</a>
+                        <span>|</span>
+                        <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="#">Delete</a>
+                    </td>
+                </tr>
+            }
+
+
+
         </tbody>
     </table>
 </div>
-

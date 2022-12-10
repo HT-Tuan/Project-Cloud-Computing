@@ -1,35 +1,50 @@
 ﻿@{
-    ViewData["Title"] = "Student Form";
-}
-<h1>@ViewData["Title"]</h1>
-<div>
-    <form class="row g-3">
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Fullname</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter Full Name">
-        </div>
+        ViewData["Title"] = "Student Form";
+    }
+    <h1>@ViewData["Title"]</h1>
+    <div>
+        <form action="AddStudentForm" method="POST" class="row g-3">
+            <div class="mb-3">
+                <label class="form-label">Mã Sinh Viên</label>
+                <input type="text" class="form-control" name="mssv" placeholder="Nhập Vào Mã Sinh Viên">
+            </div>
 
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Student Identity address</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter Student id">
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Họ Đệm</label>
+                <input type="text" class="form-control" name="hoDem" placeholder="Nhậo Vào Họ Đệm">
+            </div>
 
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-        </div>
+             <div class="mb-3">
+                <label class="form-label">Tên</label>
+                <input type="text" class="form-control" name="ten" placeholder="Nhập vào Tên">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Năm Học</label>
+                <input type="number" class="form-control" name="namHoc" placeholder="Nhập vào Năm Học">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Ngày Sinh</label>
+                <input type="date" class="form-control" name="ngaysinh" placeholder="Nhập vào Ngày Sinh">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Năm Nhập Học</label>
+                <input type="number" class="form-control" name="namnhaphoc" placeholder="Nhập vào Năm Nhập Học">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Giới Tính</label>
+                <select name="form-control" >
+                    <option value="Nam">Nam</option>
+                    <option value="Nu">Nu</option>
 
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Birth of date</label>
-            <input type="date" class="form-control" id="exampleFormControlInput1"">
-        </div>
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Class</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1"">
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Confirm</button>
-            <button type="button" class="btn btn-danger mb-3">Cancel</button>
-        </div>
-    </form>
-</div>
+                </select>
+            </div> 
+            
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Tên Chương Trình Đào Tạo</label>
+                <input type="text" class="form-control" name="ctdt" placeholder="Nhập vào Tên Chương Trình Đào Tạo">
+            </div>
+
+            <button type="submit">submit</button>
+
+        </form>
+    </div>
