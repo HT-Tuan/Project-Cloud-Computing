@@ -14,7 +14,8 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     //string baseUrl = "http://host.docker.internal:8090/";
-    string baseUrl = "http://springboot-docker-container:8090/";
+    // string baseUrl = "http://springboot-docker-container:8090/";
+    string baseUrl = "http://JavaAPI:8090/";
 
 
     public HomeController(ILogger<HomeController> logger)
