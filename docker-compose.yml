@@ -34,10 +34,9 @@ services:
   # Backend
   java-springboot:
     container_name: JavaAPI
-    # build: 
-    #   dockerfile: Dockerfile
-    #   context: ./cloud/
-    image: tuancodeit/springboot-docker:v2.0.0
+    build: 
+      dockerfile: Dockerfile
+      context: ./cloud/
     ports:
       -  "8090:8090"
     volumes:
