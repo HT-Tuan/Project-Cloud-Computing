@@ -1,0 +1,30 @@
+﻿
+    @{
+        ViewData["Title"] = "Sửa Phần Tham Gia Học";
+    }
+    <h1>@ViewData["Title"]</h1>
+    <div>
+        @{
+
+            ThamGiaHocModel TGH = Model;
+
+                <form action="UpdateThamGia" method="POST" class="row g-3">
+                    <div class="mb-3">
+                        <label class="form-label">Mã Lớp học phần</label>
+                        <input type="text" value=@TGH.maLopHocPhan class="form-control" name="maLopHocPhan" placeholder="Nhập Vào Mã Lớp học phần">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mã Sinh Viên </label>
+                        <input type="text" value=@TGH.maSinhVien class="form-control" name="maSinhVien" placeholder="Nhập Vào Mã Sinh Viên">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Điểm Số</label>
+                        <input type="number" value=@TGH.diemSo class="form-control" name="diemSo" placeholder="Nhập Vào Điểm Số">
+                    </div>
+
+                    <button type="submit">submit</button>
+                </form>
+
+        }
+
+    </div>

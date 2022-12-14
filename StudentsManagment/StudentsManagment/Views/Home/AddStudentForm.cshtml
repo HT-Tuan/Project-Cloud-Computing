@@ -30,18 +30,27 @@
                 <label class="form-label">Năm Nhập Học</label>
                 <input type="number" class="form-control" name="namnhaphoc" placeholder="Nhập vào Năm Nhập Học">
             </div>
+
+            @*input sex*@
             <div class="mb-3">
                 <label class="form-label">Giới Tính</label>
-                <select name="form-control" >
+                <select name="gioiTinh" >
                     <option value="Nam">Nam</option>
                     <option value="Nu">Nu</option>
-
                 </select>
             </div> 
-            
+
+            @*Input chuong trinh dao tao*@
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Tên Chương Trình Đào Tạo</label>
-                <input type="text" class="form-control" name="ctdt" placeholder="Nhập vào Tên Chương Trình Đào Tạo">
+                <select name="ctdt">
+                    <option value="Công nghệ Thông tin">Công nghệ Thông tin</option>
+                    <option value="Khoa học Máy tính">Khoa học Máy tính</option>
+                    <option value="Kế toán">Kế toán</option>
+                    <option value="Quản trị kinh doanh">Quản trị kinh doanh</option>
+                    <option value="Tài chính">Tài chính</option>
+                    
+                </select>
             </div>
 
             <button type="submit">submit</button>

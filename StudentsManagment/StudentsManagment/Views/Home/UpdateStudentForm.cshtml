@@ -1,35 +1,71 @@
-﻿@{
-    ViewData["Title"] = "Student Update Form";
-}
-<h1>@ViewData["Title"]</h1>
-<div>
-    <form class="row g-3">
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Fullname</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter Full Name">
-        </div>
+﻿
+    @{
+        ViewData["Title"] = "Student Update Form";
+    }
+    <h1>@ViewData["Title"]</h1>
+    <div>
+        @{
 
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Student Identity address</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter Student id">
-        </div>
+            SinhVienModel sv = Model;
 
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-        </div>
+            <form action="UpdateStudentForm" method="POST" class="row g-3">
+                <div class="mb-3">
+                    <label class="form-label">Mã Sinh Viên</label>
+                    <input readonly type="text" value=@sv.masinhvien class="form-control" name="mssv" placeholder="Nhập Vào Mã Sinh Viên">
+                </div>
 
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Birth of date</label>
-            <input type="date" class="form-control" id="exampleFormControlInput1" ">
-        </div>
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Class</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" ">
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Update</button>
-            <button type="button" class="btn btn-danger mb-3">Cancel</button>
-        </div>
-    </form>
-</div>
+                <div class="mb-3">
+                    <label class="form-label">Họ Đệm</label>
+                    <input type="text" value=@sv.hodem class="form-control" name="hoDem" placeholder="Nhậo Vào Họ Đệm">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Tên</label>
+                    <input type="text" value=@sv.ten class="form-control" name="ten" placeholder="Nhập vào Tên">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Năm Học</label>
+                    <input type="number" value=@sv.namhoc class="form-control" name="namHoc" placeholder="Nhập vào Năm Học">
+                </div>
+
+                @*can not pass from controller to view with date value*@
+                <div class="mb-3">
+                    <label class="form-label">Ngày Sinh</label>
+                    <p class="text-secondary">Ngay sinh hien tai la: @sv.ngaysinh</p>
+                    <input type="date" value=@sv.ngaysinh class="form-control" name="ngaysinh" placeholder="Nhập vào Ngày Sinh">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Năm Nhập Học</label>
+                    <input type="number" value=@sv.namnhaphoc class="form-control" name="namnhaphoc" placeholder="Nhập vào Năm Nhập Học">
+                </div>
+
+                @*input sex*@
+                @*can not pass from controller to view with date value*@
+                <div class="mb-3">
+                    <label class="form-label">Giới Tính</label>
+                    <select name="gioiTinh">
+                        <option selected value="Nam">Nam</option>
+                        <option value="Nu">Nu</option>
+                    </select>
+                </div>
+
+                @*Input chuong trinh dao tao*@
+                @*can not pass from controller to view with date value*@
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Tên Chương Trình Đào Tạo</label>
+                    <select name="ctdt">
+                        <option selected value="Công nghệ Thông tin">Công nghệ Thông tin</option>
+                        <option value="Khoa học Máy tính">Khoa học Máy tính</option>
+                        <option value="Kế toán">Kế toán</option>
+                        <option value="Quản trị kinh doanh">Quản trị kinh doanh</option>
+                        <option value="Tài chính">Tài chính</option>
+                    </select>
+                </div>
+
+                <button type="submit">submit</button>
+
+            </form>
+
+        }
+
+    </div>
