@@ -104,10 +104,19 @@ public class MonHocDao {
 			if (MonHoc == null) {
 				return null;
 			}
-			MonHoc.setLophocphans(null);
-			session.delete(MonHoc);
-			transaction.commit();
 			
+			String hql = "UPDATE lophocphan SET monHoc = null WHERE monHoc.maMonHoc = :key";
+			Query query = session.createQuery(hql);
+			query.setParameter("key", maMonHoc);
+			query.executeUpdate();
+
+			String hql1 = "DELETE FROM monhoc WHERE maMonHoc = :key";
+			Query query2 = session.createQuery(hql1);
+			query2.setParameter("key", maMonHoc);
+			query2.executeUpdate();
+
+			transaction.commit();
+
 			return MonHoc;
 		}
 		catch (Exception e) {

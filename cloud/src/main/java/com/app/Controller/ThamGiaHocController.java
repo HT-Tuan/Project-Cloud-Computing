@@ -93,7 +93,7 @@ public class ThamGiaHocController {
 	} 
 	
 	@DeleteMapping (value = "/thamgiahoc/{maLopHocPhan}/{maSinhVien}")
-	public ResponseEntity<ResponseObject> update (@PathVariable int maLopHocPhan, 
+	public ResponseEntity<ResponseObject> delete (@PathVariable int maLopHocPhan, 
 			@PathVariable String maSinhVien) {
 		thamgiahoc ThamGia = thamGiaHocDao.delete(maLopHocPhan, maSinhVien);
 		

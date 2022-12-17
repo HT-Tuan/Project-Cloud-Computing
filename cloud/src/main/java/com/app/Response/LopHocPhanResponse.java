@@ -2,18 +2,13 @@ package com.app.Response;
 
 
 public class LopHocPhanResponse {
-	private int maLopHocPhan;
+	private Integer maLopHocPhan;
 	private String maMonHoc;
     private int namHoc;
     private String hocKy;
     private int gioiHanSlg;
     
-	public int getMaLopHocPhan() {
-		return maLopHocPhan;
-	}
-	public void setMaLopHocPhan(int maLopHocPhan) {
-		this.maLopHocPhan = maLopHocPhan;
-	}
+	
 	public String getMaMonHoc() {
 		return maMonHoc;
 	}
@@ -37,5 +32,11 @@ public class LopHocPhanResponse {
 	}
 	public void setGioiHanSlg(int gioiHanSlg) {
 		this.gioiHanSlg = gioiHanSlg;
+	}
+	public Integer getMaLopHocPhan() {
+		return maLopHocPhan;
+	}
+	public void setMaLopHocPhan(Integer maLopHocPhan) {
+		this.maLopHocPhan = maLopHocPhan;
 	}   
 }

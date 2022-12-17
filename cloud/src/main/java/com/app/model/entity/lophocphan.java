@@ -20,7 +20,7 @@ import javax.persistence.Table;
 public class lophocphan implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int maLopHocPhan;
+    private Integer maLopHocPhan;
 
     private int namHoc;
     private String hocKy;
@@ -35,14 +35,7 @@ public class lophocphan implements Serializable{
     @OneToMany(mappedBy = "lophoc", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<thamgiahoc> thamgiahocs;
 
-    public int getMaLopHocPhan() {
-        return maLopHocPhan;
-    }
-
-    public void setMaLopHocPhan(int maLopHocPhan) {
-        this.maLopHocPhan = maLopHocPhan;
-    }
-
+    
     public int getNamHoc() {
         return namHoc;
     }
@@ -81,6 +74,14 @@ public class lophocphan implements Serializable{
 
     public void setThamgiahocs(Set<thamgiahoc> thamgiahocs) {
         this.thamgiahocs = thamgiahocs;
+    }
+
+    public Integer getMaLopHocPhan() {
+        return maLopHocPhan;
+    }
+
+    public void setMaLopHocPhan(Integer maLopHocPhan) {
+        this.maLopHocPhan = maLopHocPhan;
     }
 
 }

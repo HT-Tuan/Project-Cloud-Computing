@@ -90,7 +90,8 @@ public class LopHocPhanController {
 				? ResponseEntity.status(HttpStatus.NOT_FOUND)
 						.body(new ResponseObject("Failed", "Failed to delete the subject", ""))
 				: ResponseEntity.status(HttpStatus.OK).body(
-						new ResponseObject("Success", "Delete subject successfully", convertToResponseObject(LopHoccPhan)));
+						new ResponseObject("Success", "Delete subject successfully",
+								convertToResponseObject(LopHoccPhan)));
 	}
 
 	private lophocphan convertToEntityObject(LopHocPhanResponse response) {
@@ -116,7 +117,10 @@ public class LopHocPhanController {
 
 		LopHocPhanResponse response = new LopHocPhanResponse();
 		response.setMaLopHocPhan(LopHocPhan.getMaLopHocPhan());
-		response.setMaMonHoc(LopHocPhan.getMonHoc().getMaMonHoc());
+		if (LopHocPhan.getMonHoc() != null)
+			response.setMaMonHoc(LopHocPhan.getMonHoc().getMaMonHoc());
+		else
+			response.setMaMonHoc(null);
 		response.setNamHoc(LopHocPhan.getNamHoc());
 		response.setHocKy(LopHocPhan.getHocKy());
 		response.setGioiHanSlg(LopHocPhan.getGioiHanSlg());

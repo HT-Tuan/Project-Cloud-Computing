@@ -103,14 +103,20 @@ public class LopHocPhanDao {
 		try {
 			Session session = HibernateUtils.getFACTORY().openSession();
 			transaction = session.beginTransaction();
-			
 			lophocphan LopHocPhan = select(id);
 			if (LopHocPhan == null) {
 				return null;
 			}
-			LopHocPhan.setThamgiahocs(null);
-			session.delete(LopHocPhan);
+			String hql = "DELETE FROM thamgiahoc WHERE lophoc.maLopHocPhan = :key";
+			Query query = session.createQuery(hql);
+			query.setParameter("key", id);
+			query.executeUpdate();
 			
+			String hql1 = "DELETE FROM lophocphan WHERE maLopHocPhan = :key";
+			
+			Query query2 = session.createQuery(hql1);
+			query2.setParameter("key", id);
+			query2.executeUpdate();
 			transaction.commit();
 			
 			return LopHocPhan;
