@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace StudentsManagment.Models
 {
 	public class SinhVienModel

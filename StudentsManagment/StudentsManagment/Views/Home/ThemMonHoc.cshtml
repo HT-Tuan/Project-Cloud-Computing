@@ -1,0 +1,36 @@
+﻿@{
+        ViewData["Title"] = "Thêm Môn Học";
+    }
+    <h1>@ViewData["Title"]</h1>
+    <div>
+        <form action="ThemMonHoc" method="POST" class="row g-3">
+            <div class="mb-3">
+                <label class="form-label">Mã Môn Học</label>
+                <input type="text" class="form-control" name="idMonHoc" placeholder="Nhập Vào Mã Môn Học">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tên Môn Học</label>
+                <input type="text" class="form-control" name="tenMonHoc" placeholder="Nhậo Vào Tên Môn Học">
+            </div>
+
+             <div class="mb-3">
+                <label class="form-label">Số Tín Chỉ</label>
+                <input type="number" class="form-control" name="soTinChi" placeholder="Nhập vào Số Tín Chỉ">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Thẻ Loại</label>
+                <input type="text" class="form-control" name="theloai" placeholder="Nhập vào Thẻ Loại">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Mã Chương Trình Đào Tạo</label>
+                <input type="text" class="form-control" name="idChuongTrinhDaoTao" placeholder="Nhập vào Mã Chương Trình Đào Tạo">
+            </div>
+            
+            
+            
+
+            <button type="submit">submit</button>
+
+        </form>
+    </div>

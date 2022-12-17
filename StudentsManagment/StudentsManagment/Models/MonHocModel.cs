@@ -8,7 +8,7 @@ namespace StudentsManagment.Models
 
         public string maMonHoc { get; set; }
         public string tenMonHoc { get; set; }
-        public string soTinchi { get; set; }
+        public float soTinchi { get; set; }
         public string theLoai { get; set; }
         public string idChuongTrinhDaoTao { get; set; }
 

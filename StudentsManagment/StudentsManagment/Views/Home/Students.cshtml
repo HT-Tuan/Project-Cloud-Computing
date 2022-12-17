@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Danh Sách sinh viên";
+        ViewData["Title"] = "Danh Sách sinh viên";
 }
 
 <div>
@@ -42,15 +42,29 @@
                     <td>@item.namhoc</td>
                     <td>@item.ngaysinh</td>
                     <td>@item.namnhaphoc</td>
+                  
                     <td>@item.gioitinh</td>
                     <td>@item.tenChuongTrinhDaoTao</td>
                     <td></td>
 
 
                     <td class="d-flex align-items-center">
-                        <a class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="UpdateStudentForm">Edit</a>
+                        <form action="UpdateStudentForm">
+                            <input hidden value=@item.masinhvien name="mssv">
+                            <input hidden value=@item.hodem name="hodem">
+                            <input hidden value=@item.ten name="ten">
+                            <input hidden value=@item.namhoc name="namhoc">
+                            <input hidden value=@item.ngaysinh name="ngaysinh">
+                            <input hidden value=@item.namnhaphoc name="namnhaphoc">
+                            <input hidden value=@item.gioitinh name="gioitinh">
+                            <input hidden value=@item.tenChuongTrinhDaoTao name="ctdt">
+                            <button class="btn btn-warning" type="submit">Edit</button>
+                        </form>
                         <span>|</span>
-                        <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="#">Delete</a>
+                        <form asp-controller="Home" asp-action="DeleteStudent" method="post">
+                            <input hidden value=@item.masinhvien name="mssv">
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
                     </td>
                 </tr>
                 }

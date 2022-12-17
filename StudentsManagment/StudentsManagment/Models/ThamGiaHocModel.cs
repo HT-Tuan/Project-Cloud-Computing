@@ -6,10 +6,8 @@ namespace StudentsManagment.Models
 		
 			public string maLopHocPhan { get; set; }
 			public string maSinhVien { get; set; }
-			public string diemSo { get; set; }
+			public float diemSo { get; set; }
 			
-
-    
 	}
 }
 

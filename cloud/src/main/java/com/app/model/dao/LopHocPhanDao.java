@@ -50,7 +50,7 @@ public class LopHocPhanDao {
 			}
 			e.printStackTrace();
 			return null;
-		}
+		}	
 	}
 	
 	public List<lophocphan> findAll () {

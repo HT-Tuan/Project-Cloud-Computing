@@ -1,11 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "ChuongTrinhDaoTao";
+    ViewData["Title"] = "Chươn Trình Đạo Tạo";
 }
 
 <div>
     <div>
         <h1>@ViewData["Title"]</h1>
-        <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="AddStudentForm">Add new student</a>
+        <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="ThemChuongTrinh">Thêm Chương Trình Đào Tạo</a>
     </div>
     <form class="d-flex mb-1">
         <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -37,9 +37,18 @@
                 <td>@item.namBatDauDaoTao</td>
                 <td></td>
                 <td class="d-flex align-items-center">
-                    <a class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="UpdateStudentForm">Edit</a>
+                    <form action="UpdateChuongTrinh">
+                        <input hidden type="text" value='@item.idChuongTrinhDaoTao' name="idChuongTrinhDaoTao">
+                        <input hidden type="text" value='@item.tenChuongTrinhDaoTao' name="tenChuongTrinhDaoTao">
+                        <input hidden type="number" value=@item.soTinChi name="soTinChi">
+                        <input hidden type="number" value=@item.namBatDauDaoTao name="namBatDauDaoTao">
+                        <button class="btn btn-warning" type="submit">Edit</button>
+                    </form>
                     <span>|</span>
-                    <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="#">Delete</a>
+                    <form asp-controller="Home" asp-action="DeleteStudent" method="post">
+                        <input hidden value=@item.idChuongTrinhDaoTao name="idChuongTrinhDaoTao">
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
                 </td>
             </tr>
             }
