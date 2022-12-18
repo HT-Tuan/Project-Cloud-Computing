@@ -61,7 +61,7 @@ public class SinhVienController {
         temp.setNamNhapHoc(data.getNamnhaphoc());
         temp.setGioiTinh(data.getGioitinh());
         temp.setChuongtrinh(chuongTrinhDTDao.getName(data.getTenChuongTrinhDaoTao()));
-        if (temp.getTrangThai() == false) {
+        if (temp.getTrangThai() != null && temp.getTrangThai() == false) {
             temp.setTrangThai(true);
             if (sinhVienDao.update(temp) == true) {
                 return new ResponseEntity<>(data, HttpStatus.OK);
