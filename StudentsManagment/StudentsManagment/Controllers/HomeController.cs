@@ -20,10 +20,6 @@ public class HomeController : Controller
 
     string baseUrl = "http://JavaAPI:8090/";
 
-    // string baseUrl = "http://host.docker.internal:8090/";
-    //string baseUrl = "http://springboot-docker-container:8090/";
-
-
     public HomeController(ILogger<HomeController> logger)
     {
         logger = logger;
