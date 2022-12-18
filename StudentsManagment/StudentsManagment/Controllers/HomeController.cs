@@ -18,7 +18,10 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
 
-    string baseUrl = "http://JavaAPI:8090/";
+    //string baseUrl = "http://JavaAPI:8090/";
+
+    string baseUrl = "http://host.docker.internal:8090/";
+    //string baseUrl = "http://springboot-docker-container:8090/";
 
 
     public HomeController(ILogger<HomeController> logger)
@@ -203,7 +206,9 @@ public class HomeController : Controller
             }
         }
 
-        return RedirectToAction("Students");
+        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+
+        return View(student);
     }
 
 
@@ -371,32 +376,9 @@ public class HomeController : Controller
             return View(LHPInfo);
         }
     }
-    public async Task<ActionResult> ThemLopHocPhan()
+    public IActionResult ThemLopHocPhan()
     {
-        List<MonHocModel> MonHocInfo = new List<MonHocModel>();
-        using (var client = new HttpClient())
-        {
-            //Passing service base url
-            client.BaseAddress = new Uri(baseUrl);
-            client.DefaultRequestHeaders.Clear();
-            //Define request data format
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            //Sending request to find web api REST service resource GetAllEmployees using HttpClient
-            HttpResponseMessage Res = await client.GetAsync("api/monhoc");
-
-            //Checking the response is successful or not which is sent using HttpClient
-            if (Res.IsSuccessStatusCode)
-            {
-                //Storing the response details recieved from web api
-                var MonHocResponse = Res.Content.ReadAsStringAsync().Result;
-
-                //Deserializing the response recieved from web api and storing into the Employee list
-                MonHocInfo = JsonConvert.DeserializeObject<List<MonHocModel>>(MonHocResponse);
-            }
-            //returning the employee list to view
-
-            return View(MonHocInfo);
-        }
+        return View();
     }
 
 
@@ -404,10 +386,10 @@ public class HomeController : Controller
 
 
     [HttpPost]
-    public ActionResult ThemLopHocPhan(string maMonHoc, int namHoc, string hocKy, int gioiHanSlg)
+    public ActionResult ThemLopHocPhan(int maLopHocPhan, string maMonHoc, int namHoc, string hocKy, int gioiHanSlg)
     {
         LopHocPhanModel LHP = new LopHocPhanModel();
-        LHP.maLopHocPhan = null;
+        LHP.maLopHocPhan = maLopHocPhan;
         LHP.maMonHoc = maMonHoc;
         LHP.namHoc = namHoc;
         LHP.hocKy = hocKy;
@@ -427,7 +409,10 @@ public class HomeController : Controller
                 return RedirectToAction("LopHocPhan");
             }
         }
-      return RedirectToAction("LopHocPhan");
+
+        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+
+        return View(LHP);
     }
 
 
@@ -451,6 +436,7 @@ public class HomeController : Controller
 
 
         LopHocPhanModel LHP = new LopHocPhanModel();
+        LHP.maLopHocPhan = maLopHocPhan;
         LHP.maMonHoc = maMonHoc;
         LHP.namHoc = namHoc;
         LHP.hocKy = hocKy;
@@ -589,7 +575,9 @@ public class HomeController : Controller
             }
         }
 
-        return RedirectToAction("MonHoc");
+        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+
+        return View(mh);
     }
 
 
@@ -765,7 +753,7 @@ public class HomeController : Controller
 
         ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
 
-        return View(TGH);
+        return View(ThamGiaHoc);
     }
 
     public ActionResult DeleteThamGiaHoc(string maLopHocPhan, string maSinhVien)
