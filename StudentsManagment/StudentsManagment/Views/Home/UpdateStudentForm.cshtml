@@ -16,7 +16,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Họ Đệm</label>
-                        <input type="text" value=@sv.hodem class="form-control" name="hoDem" placeholder="Nhậo Vào Họ Đệm">
+                        <input type="text" value="@(sv.hodem)" class="form-control" name="hoDem" placeholder="Nhậo Vào Họ Đệm">
                     </div>
 
                     <div class="mb-3">
@@ -31,7 +31,7 @@
                     @*can not pass from controller to view with date value*@
                     <div class="mb-3">
                         <label class="form-label">Ngày Sinh</label>
-                        <p class="text-secondary">Ngay sinh hien tai la: @sv.ngaysinh</p>
+                        <p class="text-secondary">Ngày sinh hiện tại là: @sv.ngaysinh</p>
                         <input type="date" value=@sv.ngaysinh class="form-control" name="ngaysinh" placeholder="Nhập vào Ngày Sinh">
                     </div>
                     <div class="mb-3">
@@ -45,22 +45,20 @@
                         <label class="form-label">Giới Tính</label>
                         <select name="gioiTinh">
                             <option selected value="Nam">Nam</option>
-                            <option value="Nu">Nu</option>
+                            <option value="Nu">Nữ</option>
                         </select>
                     </div>
 
-                    @*Input chuong trinh dao tao*@
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Tên Chương Trình Đào Tạo</label>
-                        <select name="ctdt">
-                            @foreach (var item in Model)
-                            {
-                                <option value="@(item.tenChuongTrinhDaoTao)">@item.tenChuongTrinhDaoTao</option>
-                            }
-
-
-                        </select>
-                    </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Tên Chương Trình Đào Tạo</label>
+                    <select name="ctdt">
+                        <option selected value="Công nghệ Thông tin">Công nghệ Thông tin</option>
+                        <option value="Khoa học Máy tính">Khoa học Máy tính</option>
+                        <option value="Kế toán">Kế toán</option>
+                        <option value="Quản trị kinh doanh">Quản trị kinh doanh</option>
+                        <option value="Tài chính">Tài chính</option>
+                    </select>
+                </div>
 
                     <button type="submit">submit</button>
 

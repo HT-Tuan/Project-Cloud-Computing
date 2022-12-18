@@ -17,9 +17,9 @@
                 
                 <th scope="col">Mã môn học</th>
                 <th scope="col">Tên môn học</th>
-                <th scope="col">Số tín chị</th>
+                <th scope="col">Số tín chỉ</th>
                 <th scope="col">Thể loại</th>
-                <th scope="col">Mã trương chình đạo tạo</th>
+                <th scope="col">Mã chương trình đào tạo</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -42,8 +42,8 @@
 
                     <td class="d-flex align-items-center">
                         <form action="UpdateMonHoc">
-                            <input hidden type="text" value='@item.maMonHoc' name="idMonHoc">
-                            <input hidden type="text" value='@item.tenMonHoc' name="tenMonHoc">
+                            <input hidden type="text" value='@(item.maMonHoc)' name="idMonHoc">
+                            <input hidden type="text" value='@(item.tenMonHoc)' name="tenMonHoc">
                             <input hidden type="number" value=@item.soTinchi name="soTinChi">
                             <input hidden type="text" value=@item.theLoai name="theloai">
                             <input hidden type="text" value=@item.idChuongTrinhDaoTao name="idChuongTrinhDaoTao">
