@@ -14,7 +14,7 @@
                 <input type="text" class="form-control" name="hoDem" placeholder="Nhậo Vào Họ Đệm">
             </div>
 
-             <div class="mb-3">
+            <div class="mb-3">
                 <label class="form-label">Tên</label>
                 <input type="text" class="form-control" name="ten" placeholder="Nhập vào Tên">
             </div>
@@ -34,24 +34,26 @@
             @*input sex*@
             <div class="mb-3">
                 <label class="form-label">Giới Tính</label>
-                <select name="gioiTinh" >
+                <select name="gioiTinh">
                     <option value="Nam">Nam</option>
-                    <option value="Nu">Nu</option>
+                    <option value="Nu">Nữ</option>
                 </select>
-            </div> 
+            </div>
 
+            
             @*Input chuong trinh dao tao*@
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Tên Chương Trình Đào Tạo</label>
                 <select name="ctdt">
-                    <option value="Công nghệ Thông tin">Công nghệ Thông tin</option>
-                    <option value="Khoa học Máy tính">Khoa học Máy tính</option>
-                    <option value="Kế toán">Kế toán</option>
-                    <option value="Quản trị kinh doanh">Quản trị kinh doanh</option>
-                    <option value="Tài chính">Tài chính</option>
-                    
+                    @foreach (var item in Model)
+                    {
+                        <option value="@(item.tenChuongTrinhDaoTao)">@item.tenChuongTrinhDaoTao</option>
+                    }
+
+
                 </select>
             </div>
+            
 
             <button type="submit">submit</button>
 

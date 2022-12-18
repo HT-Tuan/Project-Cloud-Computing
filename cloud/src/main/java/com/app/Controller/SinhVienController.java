@@ -61,16 +61,23 @@ public class SinhVienController {
         temp.setNamNhapHoc(data.getNamnhaphoc());
         temp.setGioiTinh(data.getGioitinh());
         temp.setChuongtrinh(chuongTrinhDTDao.getName(data.getTenChuongTrinhDaoTao()));
-        temp.setTrangThai(true);
-        if (sinhVienDao.insert(temp) == true) {
-            return new ResponseEntity<>(data, HttpStatus.OK);
+        if (temp.getTrangThai() == false) {
+            temp.setTrangThai(true);
+            if (sinhVienDao.update(temp) == true) {
+                return new ResponseEntity<>(data, HttpStatus.OK);
+            }
+        } else {
+            temp.setTrangThai(true);
+            if (sinhVienDao.insert(temp) == true) {
+                return new ResponseEntity<>(data, HttpStatus.OK);
+            }
         }
+
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/sinhvien")
-    public ResponseEntity<SinhvienResponse> update(@RequestBody SinhvienResponse data)
-    {
+    public ResponseEntity<SinhvienResponse> update(@RequestBody SinhvienResponse data) {
         temp = null;
         temp = new sinhvien();
         temp.setMaSinhVien(data.getMasinhvien());

@@ -4,32 +4,36 @@
     <h1>@ViewData["Title"]</h1>
     <div>
         <form action="ThemLopHocPhan" method="POST" class="row g-3">
-            <div class="mb-3">
-                <label class="form-label">Mã lớp Học Phần</label>
-                <input type="text" class="form-control" name="maLopHocPhan" placeholder="Nhập Vào Mã Mã lớp Học Phần">
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Mã Môn học</label>
-                <input type="text" class="form-control" name="maMonHoc" placeholder="Nhậo Vào Mã Môn học">
-            </div>
-
              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Tên Môn Học</label>
+                <select name="maMonHoc">
+                    @foreach (var item in Model)
+                    {
+                        <option value="@(item.maMonHoc)">@item.tenMonHoc</option>
+                    }
+
+
+                </select>
+            </div>
+           
+
+
+            <div class="mb-3">
                 <label class="form-label">Năm Học</label>
                 <input type="number" class="form-control" name="namHoc" placeholder="Nhập vào Năm Học">
             </div>
             <div class="mb-3">
                 <label class="form-label">Học Kỳ</label>
-                <input type="number" class="form-control" name="hocky" placeholder="Nhập vào Học Kỳc">
+                <input type="number" class="form-control" name="hocky" placeholder="Nhập vào Học Kỳ">
             </div>
             <div class="mb-3">
                 <label class="form-label">Giới Hạn Số Lượng</label>
                 <input type="number" class="form-control" name="gioiHanSlg" placeholder="Nhập vào Giới Hạn Số Lượng">
             </div>
-            
-          
-            
-           
+
+
+
+
 
             <button type="submit">submit</button>
 

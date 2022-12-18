@@ -7,49 +7,59 @@
         <h1>@ViewData["Title"]</h1>
         <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="ThemLopHocPhan">Thêm Lớp Học Phần</a>
     </div>
-    <form class="d-flex mb-1">
-        <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-            <a class="btn btn-primary" href="#" role="button">Search</a>
-        </div>
-    </form>
+    
 
 
 
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">TT</th>
+                
                 <th scope="col">Mã lớp học phần</th>
                 <th scope="col">Mã môn học</th>
                 <th scope="col">Năm học</th>
                 <th scope="col">Học kỳ</th>
-                <th scope="col">Giởi hạn số lượng sinh viên</th>
+                <th scope="col">Giới hạn số lượng sinh viên</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <th scope="row"></th>
-                    <td>@item.maLopHocPhan</td>
-                    <td>@item.maMonHoc</td>
-                    <td>@item.namHoc</td>
-                    <td>@item.hocKy</td>
-                    <td>@item.gioiHanSlg</td>
+            @if (Model != null)
+                {
+                @foreach (var item in Model)
+                    {
+                    <tr>
+                        
+                        <td>@item.maLopHocPhan</td>
+                        <td>@item.maMonHoc</td>
+                        <td>@item.namHoc</td>
+                        <td>@item.hocKy</td>
+                        <td>@item.gioiHanSlg</td>
 
-                    <td class="d-flex align-items-center">
-                        <a class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="ThemLopHocPhan">Edit</a>
-                        <span>|</span>
-                        <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="#">Delete</a>
-                    </td>
-                </tr>
-            }
+                        <td class="d-flex align-items-center">
+                            @*<a class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="UpdateLopHocPhan">Edit</a>*@
+                            <form action="UpdateLopHocPhan">
+                                <input hidden value=@item.maLopHocPhan name="maLopHocPhan">
+                                <input hidden value=@item.maMonHoc name="maMonHoc">
+                                <input hidden value=@item.namHoc name="namHoc">
+                                <input hidden value=@item.hocKy name="hocKy">
+                                <input hidden value=@item.gioiHanSlg name="gioiHanSlg">
+                                <button class="btn btn-warning" type="submit">Edit</button>
+                            </form>
+                            <span>|</span>
+                            <form action="DeleteLopHocPhan" method="post">
+                                <input hidden value=@item.maLopHocPhan name="maLopHocPhan">
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                        </td>
+                        
+                    </tr>
+                    }
+                }
 
 
 
-        </tbody>
+            </tbody>
     </table>
 </div>
 

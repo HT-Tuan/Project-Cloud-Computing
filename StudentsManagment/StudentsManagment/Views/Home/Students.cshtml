@@ -7,67 +7,73 @@
         <h1>@ViewData["Title"]</h1>
         <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="AddStudentForm">Add new student</a>
     </div>
-    <form class="d-flex mb-1">
-        <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-            <a class="btn btn-primary" href="#" role="button">Search</a>
-        </div>
-    </form>
+    
 
 
 
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">TT</th>
+               
                 <th scope="col">Mã sinh viên</th>
                 <th scope="col">Họ đệm</th>
-                <th scope="col">Ten</th>
+                <th scope="col">Tên</th>
                 <th scope="col">Năm học</th>
                 <th scope="col">Ngày sinh</th>
                 <th scope="col">Năm Nhập học</th>
                 <th scope="col">Giới tính</th>
-                <th scope="col">Tên Chương Trình Đào ạo</th>
+                <th scope="col">Tên Chương Trình Đào Tạo</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
-                {
-                <tr>
-                    <th scope="row"></th>
-                    <td>@item.masinhvien</td>
-                    <td>@item.hodem</td>
-                    <td>@item.ten</td>
-                    <td>@item.namhoc</td>
-                    <td>@item.ngaysinh</td>
-                    <td>@item.namnhaphoc</td>
-                  
-                    <td>@item.gioitinh</td>
-                    <td>@item.tenChuongTrinhDaoTao</td>
-                    <td></td>
+           
+                @foreach (var item in Model)
+                    {
+                    <tr>
+                        
+                        <td>@item.masinhvien</td>
+                        <td>@item.hodem</td>
+                        <td>@item.ten</td>
+                        <td>@item.namhoc</td>
+                        <td>@item.ngaysinh</td>
+                        <td>@item.namnhaphoc</td>
+                        @if(@item.gioitinh == true)
+                        {
+                            <td>Nam</td>
+                        }
+                        else
+                        {
+                            <td>Nữ</td>
+                        }
+                        <td>@item.tenChuongTrinhDaoTao</td>
+                        <td></td>
 
 
-                    <td class="d-flex align-items-center">
-                        <form action="UpdateStudentForm">
-                            <input hidden value=@item.masinhvien name="mssv">
-                            <input hidden value=@item.hodem name="hodem">
-                            <input hidden value=@item.ten name="ten">
-                            <input hidden value=@item.namhoc name="namhoc">
-                            <input hidden value=@item.ngaysinh name="ngaysinh">
-                            <input hidden value=@item.namnhaphoc name="namnhaphoc">
-                            <input hidden value=@item.gioitinh name="gioitinh">
-                            <input hidden value=@item.tenChuongTrinhDaoTao name="ctdt">
-                            <button class="btn btn-warning" type="submit">Edit</button>
-                        </form>
-                        <span>|</span>
-                        <form asp-controller="Home" asp-action="DeleteStudent" method="post">
-                            <input hidden value=@item.masinhvien name="mssv">
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                }
+                        <td class="d-flex align-items-center">
+                            <form action="UpdateStudentForm">
+                                <input hidden value=@item.masinhvien name="mssv">
+                                <input hidden value="@(item.hodem)" name="hodem" />
+                                <input hidden value=@item.ten name="ten">
+                                <input hidden value=@item.namhoc name="namhoc">
+                                <input hidden value=@item.ngaysinh name="ngaysinh">
+                                <input hidden value=@item.namnhaphoc name="namnhaphoc">
+                                <input hidden value=@item.gioitinh name="gioitinh">
+                                <input hidden value=@item.tenChuongTrinhDaoTao name="ctdt">
+                                <button class="btn btn-warning" type="submit">Edit</button>
+                            </form>
+
+                            <span>|</span>
+
+                            @*<form asp-controller="Home" asp-action="DeleteStudent" method="post">*@
+                                <form  action="DeleteStudent" method="post">
+                                    <input hidden value=@item.masinhvien name="mssv">
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
+                        </td>
+                    </tr>
+                    }
+                
 
 
             </tbody>

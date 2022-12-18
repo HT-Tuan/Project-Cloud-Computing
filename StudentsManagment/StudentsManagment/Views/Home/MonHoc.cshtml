@@ -7,32 +7,31 @@
         <h1>@ViewData["Title"]</h1>
         <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="ThemMonHoc">Thêm Môn Học</a>
     </div>
-    <form class="d-flex mb-1">
-        <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-            <a class="btn btn-primary" href="#" role="button">Search</a>
-        </div>
-    </form>
+    
 
 
 
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">TT</th>
+                
                 <th scope="col">Mã môn học</th>
                 <th scope="col">Tên môn học</th>
-                <th scope="col">Số tín chị</th>
+                <th scope="col">Số tín chỉ</th>
                 <th scope="col">Thể loại</th>
-                <th scope="col">Mã trương chình đạo tạo</th>
+                <th scope="col">Mã chương trình đào tạo</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
+            @if (Model != null)
+                {
+
             @foreach (var item in Model)
-            {
+                {
+
                 <tr>
-                    <th scope="row"></th>
+                   
                     <td>@item.maMonHoc</td>
                     <td>@item.tenMonHoc</td>
                     <td>@item.soTinchi</td>
@@ -43,22 +42,23 @@
 
                     <td class="d-flex align-items-center">
                         <form action="UpdateMonHoc">
-                            <input hidden type="text" value='@item.maMonHoc' name="idMonHoc">
-                            <input hidden type="text" value='@item.tenMonHoc' name="tenMonHoc">
+                            <input hidden type="text" value='@(item.maMonHoc)' name="idMonHoc">
+                            <input hidden type="text" value='@(item.tenMonHoc)' name="tenMonHoc">
                             <input hidden type="number" value=@item.soTinchi name="soTinChi">
                             <input hidden type="text" value=@item.theLoai name="theloai">
                             <input hidden type="text" value=@item.idChuongTrinhDaoTao name="idChuongTrinhDaoTao">
                             <button class="btn btn-warning" type="submit">Edit</button>
                         </form>
                         <span>|</span>
-                        <form asp-controller="Home" asp-action="#" method="post">
-                            <input hidden value=@item.idChuongTrinhDaoTao name="idChuongTrinhDaoTao">
+                        <form asp-controller="Home" asp-action="DeleteMonHoc" method="post">
+                            <input hidden value=@item.maMonHoc name="maMonHoc">
                             <button class="btn btn-danger" type="submit">Delete</button>
+
                         </form>
                     </td>
                 </tr>
-            }
-            
+                }
+                }
 
 
         </tbody>

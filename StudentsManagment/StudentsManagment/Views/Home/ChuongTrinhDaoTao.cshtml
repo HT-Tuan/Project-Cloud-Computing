@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Chươn Trình Đạo Tạo";
+    ViewData["Title"] = "Chương Trình Đào Tạo";
 }
 
 <div>
@@ -7,22 +7,17 @@
         <h1>@ViewData["Title"]</h1>
         <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="ThemChuongTrinh">Thêm Chương Trình Đào Tạo</a>
     </div>
-    <form class="d-flex mb-1">
-        <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-            <a class="btn btn-primary" href="#" role="button">Search</a>
-        </div>
-    </form>
+    
 
 
 
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">TT</th>
+                
                 <th scope="col">Mã chương trình đạo tạo</th>
                 <th scope="col">Tên chương trình đạo tạo</th>
-                <th scope="col">Số tính chị</th>
+                <th scope="col">Số tính chỉ</th>
                 <th scope="col">Năm bắt đầu học</th>
             </tr>
         </thead>
@@ -30,7 +25,7 @@
             @foreach (var item in Model)
             {
             <tr>
-                <th scope="row">1</th>
+                
                 <td>@item.idChuongTrinhDaoTao</td>
                 <td>@item.tenChuongTrinhDaoTao</td>
                 <td>@item.soTinChi</td>
@@ -38,14 +33,14 @@
                 <td></td>
                 <td class="d-flex align-items-center">
                     <form action="UpdateChuongTrinh">
-                        <input hidden type="text" value='@item.idChuongTrinhDaoTao' name="idChuongTrinhDaoTao">
-                        <input hidden type="text" value='@item.tenChuongTrinhDaoTao' name="tenChuongTrinhDaoTao">
+                        <input hidden type="text" value='@(item.idChuongTrinhDaoTao)' name="idChuongTrinhDaoTao">
+                        <input hidden type="text" value='@(item.tenChuongTrinhDaoTao)' name="tenChuongTrinhDaoTao">
                         <input hidden type="number" value=@item.soTinChi name="soTinChi">
                         <input hidden type="number" value=@item.namBatDauDaoTao name="namBatDauDaoTao">
                         <button class="btn btn-warning" type="submit">Edit</button>
                     </form>
                     <span>|</span>
-                    <form asp-controller="Home" asp-action="DeleteStudent" method="post">
+                    <form asp-controller="Home" asp-action="DeleteChuongTrinh" method="post">
                         <input hidden value=@item.idChuongTrinhDaoTao name="idChuongTrinhDaoTao">
                         <button class="btn btn-danger" type="submit">Delete</button>
                     </form>

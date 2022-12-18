@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Json;
+using NuGet.Packaging.Signing;
 
 namespace StudentsManagment.Controllers;
 
@@ -17,10 +18,7 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
 
-    //string baseUrl = "http://JavaAPI:8090/";
-
-    string baseUrl = "http://host.docker.internal:8090/";
-    //string baseUrl = "http://springboot-docker-container:8090/";
+    string baseUrl = "http://JavaAPI:8090/";
 
 
     public HomeController(ILogger<HomeController> logger)
@@ -38,6 +36,9 @@ public class HomeController : Controller
         return View();
     }
 
+
+
+    //Danh Sach Sinh Vien
     public async Task<ActionResult> Students()
     {
         List<SinhVienModel> SVInfo = new List<SinhVienModel>();
@@ -66,38 +67,10 @@ public class HomeController : Controller
         }
     }
 
-    //private async SinhVienModel getStudentsApi(string msv)
-    //{
-    //    SinhVienModel foundsv = new SinhVienModel();
+    
 
-    //    List<SinhVienModel> SVInfo = new List<SinhVienModel>();
-    //    using (var client = new HttpClient())
-    //    {
-    //        //Passing service base url
-    //        client.BaseAddress = new Uri(baseUrl);
-    //        client.DefaultRequestHeaders.Clear();
-    //        //Define request data format
-    //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-    //        //Sending request to find web api REST service resource GetAllEmployees using HttpClient
-    //        HttpResponseMessage Res = await client.GetAsync("sinhviens");
 
-    //        //Checking the response is successful or not which is sent using HttpClient
-    //        if (Res.IsSuccessStatusCode)
-    //        {
-    //            //Storing the response details recieved from web api
-    //            var SVResponse = Res.Content.ReadAsStringAsync().Result;
-
-    //            //Deserializing the response recieved from web api and storing into the Employee list
-    //            SVInfo = JsonConvert.DeserializeObject<List<SinhVienModel>>(SVResponse);
-    //        }
-    //        //returning the employee list to view
-    //    }
-
-    //    foundsv = SVInfo.Find(x => x.masinhvien == msv);
-
-    //    return foundsv;
-    //}
-
+    //Sua
     public IActionResult UpdateStudentForm(string mssv, string hodem, string ten, int namhoc, DateTime ngaysinh, int namnhaphoc, string gioitinh, string ctdt)
     {
 
@@ -147,39 +120,58 @@ public class HomeController : Controller
         return View(student);
     }
 
-
-    //[HttpPost]
-    //public ActionResult DeleteStudent(string mssv)
-    //{
-    //    //JObject json = JObject.Parse(mssv);
-    //    //var jsoon = @"{""id"":1,""name"":""Foo""}";
-    //    using (var client = new HttpClient())
-    //    {
-    //        client.BaseAddress = new Uri(baseUrl+"sinhvien");
-    //        //HTTP POST
-    //        var postTask = client.DeleteFromJsonAsync<String>(baseUrl + "sinhvien")
-
-    //        //Console.WriteLine("Tons "+mssv);
-    //        postTask.Wait();
-
-    //        var result = postTask.Result;
-    //        if (result.IsSuccessStatusCode)
-    //        {
-    //            return RedirectToAction("Students");
-    //        }
-    //    }
-
-    //    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-
-    //    return RedirectToAction("Students");
-
-    //}
-
-
-
-    public IActionResult AddStudentForm()
+    //Xoa
+    [HttpPost]
+    public ActionResult DeleteStudent(string mssv)
     {
-        return View();
+        using (var client = new HttpClient())
+        {
+            var postTask = client.DeleteAsync(baseUrl + "sinhvien?masinhvien=" + mssv);
+
+            //Console.WriteLine("Tons "+mssv);
+            postTask.Wait();
+
+            var result = postTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Students");
+            }
+        }
+
+        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+
+        return RedirectToAction("Students");
+
+    }
+
+    //Them
+    public async Task<ActionResult> AddStudentForm()
+    {
+
+        List<ChuongTrinhDaoTaoModel> CtdtInfo = new List<ChuongTrinhDaoTaoModel>();
+        using (var client = new HttpClient())
+        {
+            //Passing service base url
+            client.BaseAddress = new Uri(baseUrl);
+            client.DefaultRequestHeaders.Clear();
+            //Define request data format
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //Sending request to find web api REST service resource GetAllEmployees using HttpClient
+            HttpResponseMessage Res = await client.GetAsync("chuongtrinhs");
+
+            //Checking the response is successful or not which is sent using HttpClient
+            if (Res.IsSuccessStatusCode)
+            {
+                //Storing the response details recieved from web api
+                var ctdtResponse = Res.Content.ReadAsStringAsync().Result;
+
+                //Deserializing the response recieved from web api and storing into the Employee list
+                CtdtInfo = JsonConvert.DeserializeObject<List<ChuongTrinhDaoTaoModel>>(ctdtResponse);
+            }
+            //returning the employee list to view
+
+            return View(CtdtInfo);
+        }
     }
 
     [HttpPost]
@@ -211,12 +203,12 @@ public class HomeController : Controller
             }
         }
 
-        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-
-        return View(student);
+        return RedirectToAction("Students");
     }
 
 
+
+    //Chuong Tring Trinh Dao Tao
     public async Task<ActionResult> ChuongTrinhDaotao()
     {
         List<ChuongTrinhDaoTaoModel> CtdtInfo = new List<ChuongTrinhDaoTaoModel>();
@@ -245,7 +237,7 @@ public class HomeController : Controller
         }
     }
 
-
+    //Them
     public IActionResult ThemChuongTrinh()
     {
         return View();
@@ -280,10 +272,7 @@ public class HomeController : Controller
         return View(ChuongTrinh);
     }
 
-
-
-
-
+    //Sua
     public IActionResult UpdateChuongTrinh(string idChuongTrinhDaoTao, string tenChuongTrinhDaoTao, float soTinChi, int namBatDauDaoTao)
     {
 
@@ -311,7 +300,6 @@ public class HomeController : Controller
         {
             client.BaseAddress = new Uri(baseUrl + "chuongtrinh");
 
-            //HTTP POST
             var postTask = client.PutAsJsonAsync<ChuongTrinhDaoTaoModel>("chuongtrinh", ChuongTrinh);
             postTask.Wait();
 
@@ -327,8 +315,33 @@ public class HomeController : Controller
         return View(ChuongTrinh);
     }
 
+    //Xoa
+    [HttpPost]
+    public ActionResult DeleteChuongTrinh(string idChuongTrinhDaoTao)
+    {
+        using (var client = new HttpClient())
+        {
+            var postTask = client.DeleteAsync(baseUrl + "chuongtrinh?idChuongTrinhDaoTao=" + idChuongTrinhDaoTao);
 
-   
+            postTask.Wait();
+
+            var result = postTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("ChuongTrinhDaoTao");
+            }
+        }
+
+        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+
+        return RedirectToAction("ChuongTrinhDaoTao");
+
+    }
+
+
+
+
+    //Lop Hoc Phan
     public async Task<ActionResult> LopHocPhan()
     {
         List<LopHocPhanModel> LHPInfo = new List<LopHocPhanModel>();
@@ -358,95 +371,135 @@ public class HomeController : Controller
             return View(LHPInfo);
         }
     }
-    public IActionResult ThemLopHocPhan()
+    public async Task<ActionResult> ThemLopHocPhan()
     {
-        return View();
+        List<MonHocModel> MonHocInfo = new List<MonHocModel>();
+        using (var client = new HttpClient())
+        {
+            //Passing service base url
+            client.BaseAddress = new Uri(baseUrl);
+            client.DefaultRequestHeaders.Clear();
+            //Define request data format
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //Sending request to find web api REST service resource GetAllEmployees using HttpClient
+            HttpResponseMessage Res = await client.GetAsync("api/monhoc");
+
+            //Checking the response is successful or not which is sent using HttpClient
+            if (Res.IsSuccessStatusCode)
+            {
+                //Storing the response details recieved from web api
+                var MonHocResponse = Res.Content.ReadAsStringAsync().Result;
+
+                //Deserializing the response recieved from web api and storing into the Employee list
+                MonHocInfo = JsonConvert.DeserializeObject<List<MonHocModel>>(MonHocResponse);
+            }
+            //returning the employee list to view
+
+            return View(MonHocInfo);
+        }
     }
 
 
 
+
+
+    [HttpPost]
+    public ActionResult ThemLopHocPhan(string maMonHoc, int namHoc, string hocKy, int gioiHanSlg)
+    {
+        LopHocPhanModel LHP = new LopHocPhanModel();
+        LHP.maLopHocPhan = null;
+        LHP.maMonHoc = maMonHoc;
+        LHP.namHoc = namHoc;
+        LHP.hocKy = hocKy;
+        LHP.gioiHanSlg = gioiHanSlg;
+
+        using (var client = new HttpClient())
+        {
+            client.BaseAddress = new Uri(baseUrl + "api/");
+
+            //HTTP POST
+            var postTask = client.PostAsJsonAsync<LopHocPhanModel>("lophocphan", LHP);
+            postTask.Wait();
+
+            var result = postTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("LopHocPhan");
+            }
+        }
+      return RedirectToAction("LopHocPhan");
+    }
+
+
     
+    //Xua
+    public IActionResult UpdateLopHocPhan(int maLopHocPhan, string maMonHoc,int namHoc, string hocKy, int gioiHanSlg)
+    {
 
-    //[HttpPost]
-    //public ActionResult ThemLopHocPhan(int maLopHocPhan, string maMonHoc, int namHoc, string hocKy, int gioiHanSlg)
-    //{
-    //    LopHocPhanModel LHP = new LopHocPhanModel();
-    //    LHP.maLopHocPhan = maLopHocPhan;
-    //    LHP.maMonHoc = maMonHoc;
-    //    LHP.namHoc = namHoc;
-    //    LHP.hocKy = hocKy;
-    //    LHP.gioiHanSlg = gioiHanSlg;
+        LopHocPhanModel LHP = new LopHocPhanModel();
+        LHP.maLopHocPhan = maLopHocPhan;
+        LHP.maMonHoc = maMonHoc;
+        LHP.namHoc = namHoc;
+        LHP.hocKy = hocKy;
+        LHP.gioiHanSlg = gioiHanSlg;
+        return View(LHP);
+    }
 
-    //    using (var client = new HttpClient())
-    //    {
-    //        client.BaseAddress = new Uri(baseUrl + "api/");
-
-    //        //HTTP POST
-    //        var postTask = client.PostAsJsonAsync<LopHocPhanModel>("lophocphan", LHP);
-    //        postTask.Wait();
-
-    //        var result = postTask.Result;
-    //        if (result.IsSuccessStatusCode)
-    //        {
-    //            return RedirectToAction("LopHocPhan");
-    //        }
-    //    }
-
-    //    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-
-    //    return View(LHP);
-    //}
+    [HttpPost]
+    public ActionResult UpdateLopHocPhan(string maMonHoc, int namHoc, int maLopHocPhan, string hocKy, int gioiHanSlg)
+    {
 
 
+        LopHocPhanModel LHP = new LopHocPhanModel();
+        LHP.maMonHoc = maMonHoc;
+        LHP.namHoc = namHoc;
+        LHP.hocKy = hocKy;
+        LHP.gioiHanSlg = gioiHanSlg;
 
 
+        using (var client = new HttpClient())
+        {
+            //client.BaseAddress = new Uri(baseUrl + "api/");
 
-    //public IActionResult UpdateLopHocPhan(string idChuongTrinhDaoTao, string tenChuongTrinhDaoTao, float soTinChi, int namBatDauDaoTao)
-    //{
+            //HTTP POST
+            var postTask = client.PutAsJsonAsync<LopHocPhanModel>(baseUrl+"api/lophocphan/" + maLopHocPhan, LHP);
 
-    //    ChuongTrinhDaoTaoModel ChuongTrinh = new ChuongTrinhDaoTaoModel();
-    //    ChuongTrinh.idChuongTrinhDaoTao = idChuongTrinhDaoTao;
-    //    ChuongTrinh.tenChuongTrinhDaoTao = tenChuongTrinhDaoTao;
-    //    ChuongTrinh.soTinChi = soTinChi;
-    //    ChuongTrinh.namBatDauDaoTao = namBatDauDaoTao;
-    //    return View(ChuongTrinh);
-    //}
+            postTask.Wait();
 
-    //[HttpPost]
-    //public ActionResult UpdateLopHocPhan(string tenChuongTrinhDaoTao, string idChuongTrinhDaoTao, int namBatDauDaoTao, float soTinChi)
-    //{
+            var result = postTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("LopHocPhan");
+            }
+        }
 
+        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
 
-    //    ChuongTrinhDaoTaoModel ChuongTrinh = new ChuongTrinhDaoTaoModel();
-    //    ChuongTrinh.idChuongTrinhDaoTao = idChuongTrinhDaoTao;
-    //    ChuongTrinh.tenChuongTrinhDaoTao = tenChuongTrinhDaoTao;
-    //    ChuongTrinh.soTinChi = soTinChi;
-    //    ChuongTrinh.namBatDauDaoTao = namBatDauDaoTao;
-
-
-    //    using (var client = new HttpClient())
-    //    {
-    //        client.BaseAddress = new Uri(baseUrl + "chuongtrinh");
-
-    //        //HTTP POST
-    //        var postTask = client.PutAsJsonAsync<ChuongTrinhDaoTaoModel>("chuongtrinh", ChuongTrinh);
-    //        postTask.Wait();
-
-    //        var result = postTask.Result;
-    //        if (result.IsSuccessStatusCode)
-    //        {
-    //            return RedirectToAction("ChuongTrinhDaoTao");
-    //        }
-    //    }
-
-    //    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-
-    //    return View(ChuongTrinh);
-    //}
+        return View(LHP);
+    }
 
 
 
+    public ActionResult DeleteLopHocPhan (string maLopHocPhan)
+    {
+        using (var client = new HttpClient())
+        {
+            var postTask = client.DeleteAsync(baseUrl + "api/lophocphan/" + maLopHocPhan);
 
+            postTask.Wait();
+
+            var result = postTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("LopHocPhan");
+            }
+        }
+
+        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+
+        return RedirectToAction("LopHocPhan");
+
+    }
 
 
 
@@ -480,9 +533,33 @@ public class HomeController : Controller
         }
 
     }
-    public IActionResult ThemMonHoc()
+    public async Task<ActionResult> ThemMonHoc()
     {
-        return View();
+
+        List<ChuongTrinhDaoTaoModel> CtdtInfo = new List<ChuongTrinhDaoTaoModel>();
+        using (var client = new HttpClient())
+        {
+            //Passing service base url
+            client.BaseAddress = new Uri(baseUrl);
+            client.DefaultRequestHeaders.Clear();
+            //Define request data format
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //Sending request to find web api REST service resource GetAllEmployees using HttpClient
+            HttpResponseMessage Res = await client.GetAsync("chuongtrinhs");
+
+            //Checking the response is successful or not which is sent using HttpClient
+            if (Res.IsSuccessStatusCode)
+            {
+                //Storing the response details recieved from web api
+                var ctdtResponse = Res.Content.ReadAsStringAsync().Result;
+
+                //Deserializing the response recieved from web api and storing into the Employee list
+                CtdtInfo = JsonConvert.DeserializeObject<List<ChuongTrinhDaoTaoModel>>(ctdtResponse);
+            }
+            //returning the employee list to view
+
+            return View(CtdtInfo);
+        }
     }
 
     [HttpPost]
@@ -512,9 +589,7 @@ public class HomeController : Controller
             }
         }
 
-        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
-
-        return View(mh);
+        return RedirectToAction("MonHoc");
     }
 
 
@@ -533,45 +608,60 @@ public class HomeController : Controller
         return View(mh);
     }
 
-    //[HttpPost]
-    //public ActionResult UpdateMonHoc(string tenMonHoc, float soTinChi, string theloai, string idMonHoc, string idChuongTrinhDaoTao)
-    //{
+    [HttpPost]
+    public ActionResult UpdateMonHoc(string tenMonHoc, float soTinChi, string theloai, string idMonHoc, string idChuongTrinhDaoTao)
+    {
 
 
-    //    MonHocModel mh = new MonHocModel();
-    //    mh.maMonHoc = idMonHoc;
-    //    mh.tenMonHoc = tenMonHoc;
-    //    mh.soTinchi = soTinChi;
-    //    mh.theLoai = theloai;
-    //    mh.idChuongTrinhDaoTao = idChuongTrinhDaoTao;
+        MonHocModel mh = new MonHocModel();
+        mh.maMonHoc = idMonHoc;
+        mh.tenMonHoc = tenMonHoc;
+        mh.soTinchi = soTinChi;
+        mh.theLoai = theloai;
+        mh.idChuongTrinhDaoTao = idChuongTrinhDaoTao;
 
-    //    Console.WriteLine(mh.maMonHoc);
-    //    Console.WriteLine(mh.tenMonHoc);
-    //    Console.WriteLine(mh.soTinchi);
-    //    Console.WriteLine(mh.theLoai);
-    //    Console.WriteLine(mh.idChuongTrinhDaoTao);
+       
 
+        using (var client = new HttpClient())
+        {
 
-    //    using (var client = new HttpClient())
-    //    {
-    //        client.BaseAddress = new Uri(baseUrl + "api/");
+            var postTask = client.PutAsJsonAsync<MonHocModel>(baseUrl + "api/monhoc/" + idMonHoc, mh);
 
-    //        //HTTP POST
-    //        var postTask = client.PutAsJsonAsync<MonHocModel>("monhoc", mh);
-    //        postTask.Wait();
+            postTask.Wait();
 
-    //        var result = postTask.Result;
-    //        if (result.IsSuccessStatusCode)
-    //        {
-    //            return RedirectToAction("MonHoc");
-    //        }
-    //    }
+            var result = postTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("MonHoc");
+            }
+        }
 
-    //    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
 
-    //    return View(mh);
-    //}
+        return View(mh);
+    }
 
+    [HttpPost]
+    public ActionResult DeleteMonHoc(string maMonHoc)
+    {
+        using (var client = new HttpClient())
+        {
+            var postTask = client.DeleteAsync(baseUrl + "api/monhoc/" + maMonHoc);
+
+            postTask.Wait();
+
+            var result = postTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("MonHoc");
+            }
+        }
+
+        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+
+        return RedirectToAction("MonHoc");
+
+    }
 
 
     public async Task<ActionResult> ThamGiaHoc()
@@ -643,45 +733,61 @@ public class HomeController : Controller
         TGH.maSinhVien = maSinhVien;
         TGH.diemSo = diemSo;
 
-        Console.WriteLine(TGH.maLopHocPhan);
-        Console.WriteLine(TGH.maSinhVien);
-        Console.WriteLine(TGH.diemSo);
-
+        
 
         return View(TGH);
     }
 
-    //[HttpPost]
-    //public ActionResult UpdateChuongTrinh(string tenChuongTrinhDaoTao, string idChuongTrinhDaoTao, int namBatDauDaoTao, float soTinChi)
-    //{
+    [HttpPost]
+    public ActionResult UpdateThamGia( string maSinhVien, float diemSo, string maLopHocPhan)
+    {
 
 
-    //    ChuongTrinhDaoTaoModel ChuongTrinh = new ChuongTrinhDaoTaoModel();
-    //    ChuongTrinh.idChuongTrinhDaoTao = idChuongTrinhDaoTao;
-    //    ChuongTrinh.tenChuongTrinhDaoTao = tenChuongTrinhDaoTao;
-    //    ChuongTrinh.soTinChi = soTinChi;
-    //    ChuongTrinh.namBatDauDaoTao = namBatDauDaoTao;
+        ThamGiaHocModel TGH = new ThamGiaHocModel();
+        TGH.maLopHocPhan = maLopHocPhan;
+        TGH.maSinhVien = maSinhVien;
+        TGH.diemSo = diemSo;
 
 
-    //    using (var client = new HttpClient())
-    //    {
-    //        client.BaseAddress = new Uri(baseUrl + "chuongtrinh");
+        using (var client = new HttpClient())
+        {
+            
+            var postTask = client.PutAsJsonAsync<ThamGiaHocModel>(baseUrl + "api/thamgiahoc/" + maLopHocPhan + "/" + maSinhVien, TGH);
 
-    //        //HTTP POST
-    //        var postTask = client.PutAsJsonAsync<ChuongTrinhDaoTaoModel>("chuongtrinh", ChuongTrinh);
-    //        postTask.Wait();
+            postTask.Wait();
 
-    //        var result = postTask.Result;
-    //        if (result.IsSuccessStatusCode)
-    //        {
-    //            return RedirectToAction("ChuongTrinhDaoTao");
-    //        }
-    //    }
+            var result = postTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("ThamGiaHoc");
+            }
+        }
 
-    //    ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
 
-    //    return View(ChuongTrinh);
-    //}
+        return View(TGH);
+    }
+
+    public ActionResult DeleteThamGiaHoc(string maLopHocPhan, string maSinhVien)
+    {
+        using (var client = new HttpClient())
+        {
+            var postTask = client.DeleteAsync(baseUrl + "api/thamgiahoc/" + maLopHocPhan + "/" + maSinhVien);
+
+            postTask.Wait();
+
+            var result = postTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("ThamGiaHoc");
+            }
+        }
+
+        ModelState.AddModelError(string.Empty, "Server Error. Please contact administrator.");
+
+        return RedirectToAction("ThamGiaHoc");
+
+    }
 
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

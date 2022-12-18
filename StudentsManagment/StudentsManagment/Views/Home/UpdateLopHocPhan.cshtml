@@ -1,44 +1,44 @@
-﻿
-        ViewData["Title"] = "Sửa Lớp Học Phần";
+﻿@{
+    ViewData["Title"] = "Sửa Lớp Học Phần";
+}
+<h1>@ViewData["Title"]</h1>
+<div>
+    @{
+
+        LopHocPhanModel LHP = Model;
+
+        <form action="UpdateLopHocPhan" method="POST" class="row g-3">
+            <div class="mb-3">
+                <label class="form-label">Mã lớp Học Phần</label>
+                <input readonly type="number" value=@LHP.maLopHocPhan class="form-control" name="maLopHocPhan" placeholder="Nhập Vào Mã Mã lớp Học Phần">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Mã Môn học</label>
+                <input type="text" value=@LHP.maMonHoc class="form-control" name="maMonHoc" placeholder="Nhậo Vào Mã Môn học">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Năm Học</label>
+                <input type="number" value=@LHP.namHoc class="form-control" name="namHoc" placeholder="Nhập vào Năm Học">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Học Kỳ</label>
+                <input type="text" value=@LHP.hocKy class="form-control" name="hocky" placeholder="Nhập vào Học Kỳ">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Giới Hạn Số Lượng</label>
+                <input type="number" value=@LHP.gioiHanSlg class="form-control" name="gioiHanSlg" placeholder="Nhập vào Giới Hạn Số Lượng">
+            </div>
+
+
+
+
+
+            <button type="submit">submit</button>
+
+        </form>
+
     }
-    <h1>@ViewData["Title"]</h1>
-    <div>
-        @{
 
-            LopHocPhanModel LHP = Model;
-
-            <form action="UpdateLopHocPhan" method="POST" class="row g-3">
-                <div class="mb-3">
-                    <label class="form-label">Mã lớp Học Phần</label>
-                    <input type="text" class="form-control" name="maLopHocPhan" placeholder="Nhập Vào Mã Mã lớp Học Phần">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Mã Môn học</label>
-                    <input type="text" class="form-control" name="maMonHoc" placeholder="Nhậo Vào Mã Môn học">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Năm Học</label>
-                    <input type="number" class="form-control" name="namHoc" placeholder="Nhập vào Năm Học">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Học Kỳ</label>
-                    <input type="text" class="form-control" name="hocky" placeholder="Nhập vào Học Kỳc">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Giới Hạn Số Lượng</label>
-                    <input type="number" class="form-control" name="gioiHanSlg" placeholder="Nhập vào Giới Hạn Số Lượng">
-                </div>
-
-
-
-
-
-                <button type="submit">submit</button>
-
-            </form>
-
-        }
-
-    </div>
+</div>

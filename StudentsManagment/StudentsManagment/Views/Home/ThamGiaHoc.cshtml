@@ -7,19 +7,14 @@
         <h1>@ViewData["Title"]</h1>
         <a class="btn btn-success" asp-area="" asp-controller="Home" asp-action="ThemThamGia">Thêm Tham Gia Học</a>
     </div>
-    <form class="d-flex mb-1">
-        <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-            <a class="btn btn-primary" href="#" role="button">Search</a>
-        </div>
-    </form>
+   
 
 
 
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">TT</th>
+                
                 <th scope="col">Mã lớp học phần</th>
                 <th scope="col">Mã sinh viên </th>
                 <th scope="col">Điểm số</th>
@@ -28,34 +23,38 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <th scope="row"></th>
-                    <td>@item.maLopHocPhan</td>
-                    <td>@item.maSinhVien</td>
-                    <td>@item.diemSo</td>
+            @if (Model != null)
+                {
+                @foreach (var item in Model)
+                    {
+                    <tr>
+                        
+                        <td>@item.maLopHocPhan</td>
+                        <td>@item.maSinhVien</td>
+                        <td>@item.diemSo</td>
 
 
-                    <td class="d-flex align-items-center">
-                        <form action="UpdateThamGia">
-                            <input hidden value=@item.maLopHocPhan name="maLopHocPhan">
-                            <input hidden value=@item.maSinhVien name="maSinhVien">
-                            <input hidden value=@item.diemSo name="diemSo">
-                           
-                            <button class="btn btn-warning" type="submit">Edit</button>
-                        </form>
-                        <span>|</span>
-                        <form asp-controller="Home" asp-action="DeleteStudent" method="post">
-                            @*<input hidden name="mssv">*@
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            }
+                        <td class="d-flex align-items-center">
+                            <form action="UpdateThamGia">
+                                <input hidden value=@item.maLopHocPhan name="maLopHocPhan">
+                                <input hidden value=@item.maSinhVien name="maSinhVien">
+                                <input hidden value=@item.diemSo name="diemSo">
+
+                                <button class="btn btn-warning" type="submit">Edit</button>
+                            </form>
+                            <span>|</span>
+                            <form action="DeleteThamGiaHoc" method="post">
+                                <input hidden value=@item.maLopHocPhan name="maLopHocPhan">
+                                <input hidden value=@item.maSinhVien name="maSinhVien">
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    }
+                }
 
 
 
-        </tbody>
+            </tbody>
     </table>
 </div>

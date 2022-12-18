@@ -10,12 +10,12 @@
         <form action="UpdateMonHoc" method="POST" class="row g-3">
             <div class="mb-3">
                 <label class="form-label">Mã Môn Học</label>
-                <input type="text" value=@MH.maMonHoc class="form-control" name="idMonHoc" placeholder="Nhập Vào Mã Môn Học">
+                <input type="text" value="@(MH.maMonHoc)" class="form-control" name="idMonHoc" placeholder="Nhập Vào Mã Môn Học">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Tên Môn Học</label>
-                <input type="text" value=@MH.tenMonHoc class="form-control" name="tenMonHoc" placeholder="Nhậo Vào Tên Môn Học">
+                <input type="text" value="@(MH.tenMonHoc)" class="form-control" name="tenMonHoc" placeholder="Nhậo Vào Tên Môn Học">
             </div>
 
             <div class="mb-3">
@@ -23,13 +23,20 @@
                 <input type="number" value=@MH.soTinchi class="form-control" name="soTinChi" placeholder="Nhập vào Số Tín Chỉ">
             </div>
             <div class="mb-3">
-                <label class="form-label">Thẻ Loại</label>
+                <label class="form-label">Thể Loại</label>
                 <input type="text" value=@MH.theLoai class="form-control" name="theloai" placeholder="Nhập vào Thẻ Loại">
             </div>
+           
             <div class="mb-3">
-                <label class="form-label">Mã Chương Trình Đào Tạo</label>
-                <input type="text" value=@MH.idChuongTrinhDaoTao class="form-control" name="idChuongTrinhDaoTao" placeholder="Nhập vào Mã Chương Trình Đào Tạo">
-            </div>
+                    <label for="exampleFormControlInput1" class="form-label">Mã Chương Trình Đào Tạo</label>
+                    <select name="idChuongTrinhDaoTao">
+                        <option selected value="CNTT">CNTT</option>
+                        <option value="KHMT">KHMT</option>
+                        <option value="KT">KT</option>
+                        <option value="QTKD">QTKD</option>
+                        <option value="TC">TC</option>
+                    </select>
+                </div>
 
 
 
