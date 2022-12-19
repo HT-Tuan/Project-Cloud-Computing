@@ -34,7 +34,7 @@ cd ./usr/local/bin
 
 # Tài liệu tham khảo
 1. https://docs.docker.com/get-started/07_multi_container/
-2. https://docs.docker.com/get-started/07_multi_container/
+2. https://earthly.dev/blog/postgres-docker/
 3. https://stackoverflow.com/questions/72187612/installing-docker-compose-plugin-on-amazon-linux-2
 4. https://www.youtube.com/watch?v=BCx8e9RDjB0
 
