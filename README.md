@@ -26,11 +26,12 @@
 ### Cài đặt docker-compose
 9. wget https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64
 10. sudo mv docker-compose-linux-x86_64 /usr/local/bin/docker-compose
-cd ./usr/local/bin
-11. sudo chmod +x /usr/local/bin/docker-compose
-12. docker-compose version
+11. cd /
+12. cd ./usr/local/bin
+13. sudo chmod +x /usr/local/bin/docker-compose
+14. docker-compose version
 ### Thực hiện chạy các container docker
-13. Vào thư mục "Project-Cloud-Computing" Thực hiện lệnh "docker-compose up"
+15. Vào thư mục "Project-Cloud-Computing" Thực hiện lệnh "docker-compose up"
 
 # Tài liệu tham khảo
 1. https://docs.docker.com/get-started/07_multi_container/
